@@ -1,13 +1,17 @@
 <template>
   <adminHeader></adminHeader>
-  <div class="row d-flex justify-content-center bg-dark">
+  <div class="row d-flex justify-content-center bg-dark px-5" >
     <div class="row justify-content-center" v-cloak>
       <advertTheme
         class="m-1"
         v-for="(adds, index) in addList"
         :key="index"
         :adds="adds"
+        v-if="addList.length>0"
       ></advertTheme>
+      <div class="alert alert-warning m-5" v-else>
+        Görüntülenecek kayıt bulunmamaktadır!!!
+      </div>
       <infiniteLoading @infinite="getList"></infiniteLoading>
     </div>
   </div>

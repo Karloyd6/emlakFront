@@ -90,22 +90,6 @@ const newAdvert = ref({
   advert_images: ['https://placeholder.co/100x100']
 })
 
-
-// const imageSave = (e)=>{
-
-//   console.log(e.target.files)
-//   const data = e.target.files
- 
-//   for(let i =0;i<data.length;i++){
-//     image.value.push({"advert_images" : data[i]})
-//   }
-
-//   console.log(image.value.json())
-
-// }
-
-
-
 const saveAdvert = async ()=>{
 
   newAdvert.value.adress.city = newAdvert.value.adress.city?.name
@@ -125,13 +109,9 @@ const saveAdvert = async ()=>{
 
   store.commit("setNewAddId",value)
   // router.push("/admin/addimages")
-}
+  router.push({name: "AdvertList"})
 
-// const imageUpload = () => {
-//   axios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/image_uploads/${_id.value}`,image.value).then((upload_res)=>{
-//       console.log(upload_res)
-//     }).catch(err => console.log(err))
-// }
+}
 
 const clearForm = ()=>{
   newAdvert.value ={

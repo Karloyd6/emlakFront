@@ -10,20 +10,8 @@
       <hr>
       <h5 class="text-bold">{{ advert.price }}</h5>
       <hr>
-      <div class="row">
-        <div class="col-4">
-            <p class="tagForInfo">Oda sayısı</p> {{ advert.infos.roomCount }}
-        </div>
-        <div class="col-4">
-            <p class="tagForInfo">kat</p> {{ advert.infos.levelOn }}/{{ advert.infos.levelAll }}
-        </div>
-        
-        <div class="col-4">
-            <p class="tagForInfo">Metrekare</p> {{ advert.infos.areaMeasureNet }}
-        </div>
-        
-      </div>
       
+        
         <div class="row p-1 d-grid mt-1" style="bottom: 0; position: relative;">
             <button class="btn btn-primary btn-sm mb-1" @click="details">Detaylar</button>
             <button class="btn btn-success btn-sm mb-1" @click="modify">Düzenle</button>
