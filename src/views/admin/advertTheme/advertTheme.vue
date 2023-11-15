@@ -47,7 +47,7 @@ const modify = ()=>{
 }
 
 const deleteAdvert = ()=>{
-    axios.delete(`http://localhost:3000/advert/${advert._id}`).then((delete_req)=>{
+    axios.delete(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/advert/${advert._id}`).then((delete_req)=>{
       
         eventEmitter.emit("delete_advert")
         
@@ -56,7 +56,7 @@ const deleteAdvert = ()=>{
 }
 
 const advertImage = computed(()=>{
-  return advert.advert_images.length !== 0 ?  `http://localhost:3000/${advert.advert_images[0]}` : "https://placehold.co/100x100"
+  return advert.advert_images.length !== 0 ?  `${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/${advert.advert_images[0]}` : "https://placehold.co/100x100"
 })
 
 </script>

@@ -90,23 +90,13 @@ const newAdvert = ref({
   title : currentAdvert.title,
   description : currentAdvert.description,
   price :currentAdvert.price,
-  infos : {
-      roomCount : currentAdvert.infos.roomCount,
-      areaMeasureNet : currentAdvert.infos.areaMeasureNet,
-      areaMeasureBrt :currentAdvert.infos.areaMeasureBrt,
-      levelOn : currentAdvert.infos.levelOn,
-      levelAll : currentAdvert.infos.levelAll,
-      buildAge : currentAdvert.infos.buildAge,
-      heating : currentAdvert.infos.heating,
-      furnished : currentAdvert.infos.furnished
-  },
   adress : {
       city : currentAdvert.adress.city,
       district : currentAdvert.adress.district,
       hood: currentAdvert.adress.hood,
       detail : currentAdvert.adress.detail,
   },
-  rentOrBuy : currentAdvert.rentOrBuy,
+  advert_images : currentAdvert.advert_images
 })
 
 const cancelForm = ()=>{

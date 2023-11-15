@@ -69,7 +69,7 @@
   </div>
 </template>
 <script setup>
-import {ref, computed} from "vue"
+import {ref} from "vue"
 import cities from "@/assets/cities/cities.json"
 import axios from "axios"
 import store from "@/store";
@@ -87,7 +87,7 @@ const newAdvert = ref({
       hood: null,
       detail : null,
   },
-  advert_images: ['https://placeholder.co/100x100']
+  advert_images: []
 })
 
 const saveAdvert = async ()=>{

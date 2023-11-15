@@ -21,23 +21,18 @@
             <div class="input-group d-grid mb-3">
                 <button class="btn btn-sm btn-primary" @click="onLogin">login</button>
             </div>
-
             <div class="delinator"><div class="delinator-line"></div></div>
 
             <div class="alert alert-warning" v-if="showError">
                 {{errorMessage}}
             </div>
-
-
             <div class="row mt-3">
                 <div class="col">
                     <a href="" >Şifremi unuttum</a>
                 </div>
             </div>
-
         </div>
         </div>
-      
     </div>
 </template>
 <script setup>

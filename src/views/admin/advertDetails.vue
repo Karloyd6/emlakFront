@@ -28,19 +28,7 @@
         <p>{{ currentAdvert.description }}</p>
 
         <div class="row my-3">
-          <div class="col">
-            <p class="tagForInfo">Oda sayısı</p>
-            {{ currentAdvert.infos.roomCount }}
-          </div>
-          <div class="col">
-            <p class="tagForInfo">kat</p>
-            {{ currentAdvert.infos.levelOn }}/{{ currentAdvert.infos.levelAll }}
-          </div>
-
-          <div class="col">
-            <p class="tagForInfo">Metrekare</p>
-            {{ currentAdvert.infos.areaMeasureNet }}
-          </div>
+          
         </div>
       </div>
       <div class="col-lg-4">
