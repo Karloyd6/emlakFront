@@ -16,21 +16,34 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <RouterLink
-              class="nav-link active"
-              aria-current="page"
-              to="/admin"
+            <RouterLink class="nav-link active" aria-current="page" to="/admin"
               >İlan listesi</RouterLink
             >
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <RouterLink
               class="nav-link active"
               aria-current="page"
               to="/admin/addAdvert"
               >İlan ekle</RouterLink
             >
+          </li> -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropbtn" href="#"
+              >İlan ekle
+              <div class="dropdown-content">
+                <RouterLink
+                  class="nav-link active"
+                  aria-current="page"
+                  to="/admin/addAdvert"
+                  >Konut</RouterLink
+                >
+                <a href="#">Arsa</a>
+                <a href="#">İşyeri</a>
+              </div>
+            </a>
           </li>
+
           <li class="nav-item">
             <a class="nav-link" href="#">Features</a>
           </li>
@@ -43,35 +56,40 @@
         </ul>
         <div class="col d-flex justify-content-end">
           <span class="text-light me-3">{{ currentUser }}</span>
-          <button class="btn btn-sm btn-dark mr-3" v-if="isAuthenticate" @click="toLogout">LogOut</button>
-          <button class="btn btn-sm btn-dark mr-3" v-else @click="toLogin">LogIn</button>
+          <button
+            class="btn btn-sm btn-dark mr-3"
+            v-if="isAuthenticate"
+            @click="toLogout"
+          >
+            LogOut
+          </button>
+          <button class="btn btn-sm btn-dark mr-3" v-else @click="toLogin">
+            LogIn
+          </button>
         </div>
       </div>
-      
     </div>
-    
   </nav>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed } from "vue";
 import router from "@/router";
 import store from "@/store";
+import { RouterLink } from "vue-router";
 
+const isAuthenticate = computed(() => {
+  return store.getters._isAuthenticate;
+});
 
-const isAuthenticate = computed(()=>{
-  return store.getters._isAuthenticate
-})
-
-const toLogin = ()=>{
-  router.push({name : "LoginPage"})
+const toLogin = () => {
+  router.push({ name: "LoginPage" });
 };
 
-const toLogout = ()=>{
+const toLogout = () => {
   store.commit("logout");
-  router.push({name : "LoginPage"})
-}
+  router.push({ name: "LoginPage" });
+};
 
-const currentUser = computed(()=>store.getters._getCurrentUser.name)
-
+const currentUser = computed(() => store.getters._getCurrentUser.name);
 </script>

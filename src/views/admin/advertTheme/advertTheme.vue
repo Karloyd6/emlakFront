@@ -68,7 +68,7 @@ const deleteAdvert = ()=>{
 }
 
 const advertImage = computed(()=>{
-  return advert.advert_images.length !== 0 ?  advert.advert_images[0] : "https://placehold.co/100x100"
+  return advert.advert_images.length !== 0 ?  `http://localhost:3000/${advert.advert_images[0]}` : "https://placehold.co/100x100"
 })
 
 </script>

@@ -2,7 +2,7 @@
 :root{
     --cd1 : #6a7285;
     --cd2 : #374258;
-    --cGrey : #c4c4c4;
+    --cGrey : #c4c4c4; 
     --ccream : #f3f3f3;
     --cred : #f74464;
 }
@@ -86,7 +86,7 @@ body{
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.18);
-    border-radius: 3px;
+    border-radius: 4px;
   }
 
   .dropdown-content a {
@@ -94,6 +94,7 @@ body{
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    border-radius: 3px;
   }
 
 .tagForInfo {
@@ -115,14 +116,6 @@ body{
     background-size: cover;
 }
 
-/* .card{
-    color: #ffffff !important;
-    background: linear-gradient(135deg, rgba(255,255,255, 0.1), rgba(255,255,255, 0)) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    backdrop-filter: blur(20px) !important;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.18) !important;
-    border-radius: 19px !important; 
-} */
 
 .login-card{
     width: 500px;

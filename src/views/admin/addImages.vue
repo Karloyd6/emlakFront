@@ -6,8 +6,9 @@
         <label for="images" class="form-label">İlan resimleri</label>
         <input class="form-control bg-secondary" ref="advert_images" type="file"  @change="uploadImages" id="images" multiple>
       </div>
-      <div class="mb-3 p-2 rounded d-grid">
+      <div class="mb-3 p-2 rounded d-grid grid-direct-row">
         <button class="btn btn-sm btn-success" @click="saveImages">Kaydet</button>
+        <button class="btn btn-sm btn-warning" @click="nextTo">Eklemeden devam et</button>
       </div>
     </div>
   </div>
@@ -17,6 +18,7 @@
 import { ref,computed } from "vue";
 import appAxios from "@/utils/appAxios.js";
 import store from "@/store"
+import router from "../../router";
 
 const images = ref({})
 const currentAdvert = computed(()=> store.getters._getCurrentAdvert)
@@ -51,6 +53,10 @@ const saveImages = ()=>{
   })
   .catch(err => console.log(err))
 
+}
+
+const nextTo= ()=>{
+  router.push({name : "AdvertList"})
 }
 
 </script>

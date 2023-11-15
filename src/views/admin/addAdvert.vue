@@ -15,15 +15,13 @@
           <label for="price" class="form-label">Fiyat</label>
           <input type="text" v-model="newAdvert.price" class="form-control bg-secondary border-dark" id="price" placeholder="fiyat">
         </div>
+        <div class="mb-3 p-2 rounded bg-warning mt-3">
+          <label for="images" class="form-label">İlan resimleri</label>
+          <input class="form-control bg-secondary" ref="advert_images" type="file"  @change="uploadImages" id="images" multiple>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12 col-sm-12">
 
-        <select  v-model="newAdvert.rentOrBuy" class="form-select mb-3 bg-secondary border-dark" aria-label="Default select example">
-              <option value="0" selected>durumunu seçiniz</option>
-              <option value="rent" selected>Kiralık</option>
-              <option value="buy" selected>Satılık</option>
-             
-              
-            </select>
-        
         <!--! ADDRESS CARD -->
 
         <div class="card bg-info text-light p-3 ml-2 mb-2 ">
@@ -56,53 +54,7 @@
           </div>
         </div>
 
-        
 
-      </div>
-      <div class="col-lg-6 col-md-12 col-sm-12">
-        <!--! INFOS CARD -->
-
-        <div class="card bg-danger text-light p-3 ml-2 mb-2 ">
-          <h5>İlan bilgileri</h5>
-          <hr>
-          <div class="mb-3 ">
-            <label for="roomCount" class="form-label">Oda sayısı</label>
-            <input type="text" v-model="newAdvert.infos.roomCount" class="form-control bg-secondary border-dark" id="roomCount" placeholder="Oda sayısı">
-          </div>
-          <div class="mb-3 ">
-            <label for="areaNet" class="form-label">Metrekare (NET)</label>
-            <input type="text" v-model="newAdvert.infos.areaMeasureNet" class="form-control bg-secondary border-dark" id="areaNet" placeholder="net metrekare">
-          </div>
-          <div class="mb-3 ">
-            <label for="areaBrt" class="form-label">Metrekare (BRÜT)</label>
-            <input type="text" v-model="newAdvert.infos.areaMeasureBrt" class="form-control bg-secondary border-dark" id="areaBrt" placeholder="brüt metrekare">
-          </div>
-          <div class="mb-3 ">
-            <label for="levelOn" class="form-label">Bulunduğu kat</label>
-            <input type="text" v-model="newAdvert.infos.levelOn" class="form-control bg-secondary border-dark" id="levelOn" placeholder="Bulunan kat">
-          </div>
-          <div class="mb-3 ">
-            <label for="levelAll" class="form-label">Toplam kat</label>
-            <input type="text" v-model="newAdvert.infos.levelAll" class="form-control bg-secondary border-dark" id="levelAll" placeholder="Toplam kat">
-          </div>
-          <div class="mb-3 ">
-            <label for="buildAge" class="form-label">Bina yaşı</label>
-            <input type="text" v-model="newAdvert.infos.buildAge" class="form-control bg-secondary border-dark" id="buildAge" placeholder="Bina yaşı">
-          </div>
-          <div class="mb-3 ">
-            <label for="heating" class="form-label">Isıtma</label>
-            <input type="text" v-model="newAdvert.infos.heating" class="form-control bg-secondary border-dark" id="heating" placeholder="Isıtma tarzı">
-          </div>
-          <div class="mb-3 ">
-            <label for="furnished" class="form-label">Eşyalı</label>
-          
-            <select  v-model="newAdvert.infos.furnished" class="form-select mb-3 bg-secondary border-dark" aria-label="Default select example">
-              <option value="0" selected>durumunu seçiniz</option>
-              <option value="yes" selected>Eşyalı</option>
-              <option value="no" selected>Eşyasız</option>
-            </select>
-          </div>
-        </div>
       </div>
     </div>
     
@@ -129,23 +81,12 @@ const newAdvert = ref({
   title : null,
   description : null,
   price :null,
-  infos : {
-      roomCount : null,
-      areaMeasureNet : null,
-      areaMeasureBrt :null,
-      levelOn : null,
-      levelAll : null,
-      buildAge : null,
-      heating : null,
-      furnished : null
-  },
   adress : {
       city : null,
       district : null,
       hood: null,
       detail : null,
   },
-  rentOrBuy : null,
   advert_images: ['https://placeholder.co/100x100']
 })
 
@@ -183,7 +124,7 @@ const saveAdvert = async ()=>{
   const value = await response.json()
 
   store.commit("setNewAddId",value)
-  router.push("/admin/addimages")
+  // router.push("/admin/addimages")
 }
 
 // const imageUpload = () => {
@@ -197,23 +138,12 @@ const clearForm = ()=>{
   title : null,
   description : null,
   price :null,
-  infos : {
-      roomCount : null,
-      areaMeasureNet : null,
-      areaMeasureBrt :null,
-      levelOn : null,
-      levelAll : null,
-      buildAge : null,
-      heating : null,
-      furnished : null
-  },
   adress : {
       city : null,
       district : null,
       hood: null,
       detail : null,
   },
-  rentOrBuy : null,
   advert_images: []
 }
 }
