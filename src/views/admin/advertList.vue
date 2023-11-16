@@ -20,7 +20,7 @@
 
 import axios from "axios";
 import advertTheme from "@/views/admin/advertTheme/advertTheme.vue";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import eventEmitter from "@/utils/eventEmitter.js";
 
 let addList = ref([]);
