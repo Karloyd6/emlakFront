@@ -15,10 +15,24 @@
           <label for="price" class="form-label">Fiyat</label>
           <input type="text" v-model="newAdvert.price" class="form-control bg-secondary border-dark" id="price" placeholder="fiyat">
         </div>
-        <div class="mb-3 p-2 rounded bg-warning mt-3">
-          <label for="images" class="form-label">İlan resimleri</label>
-          <input class="form-control bg-secondary" ref="advert_images" type="file"  @change="uploadImages" id="images" multiple>
+        <div class="mb-3">
+          <label for="type" class="form-label">İlan türü</label>
+          <select id="type"  v-model="newAdvert.type" class="form-select" aria-label="Şehir seçiniz">
+              <option selected>İlan türü giriniz</option>
+              <option value="konut">Konut</option>
+              <option value="arsa">Arsa - Tarla</option>
+              <option value="isyeri">İş yeri</option>
+            </select>
         </div>
+        <div class="mb-3">
+          <label for="rentOrBut" class="form-label">İlan durumu</label>
+          <select id="rentOrBut"  v-model="newAdvert.rentOrBuy" class="form-select" aria-label="Şehir seçiniz">
+              <option selected>İlan durumu</option>
+              <option value="sale">Satılık</option>
+              <option value="rent">Kiralık</option>
+            </select>
+        </div>
+        
       </div>
       <div class="col-lg-6 col-md-12 col-sm-12">
 
@@ -72,7 +86,7 @@
 </template>
 
 <script setup>
-import {ref} from "vue"
+import {computed, ref} from "vue"
 import store from "@/store"
 import router from "@/router"
 import cities from "@/assets/cities/cities.json"
@@ -96,7 +110,10 @@ const newAdvert = ref({
       hood: currentAdvert.adress.hood,
       detail : currentAdvert.adress.detail,
   },
-  advert_images : currentAdvert.advert_images
+  advert_images : currentAdvert.advert_images,
+  type : currentAdvert.type,
+  user : currentAdvert.user,
+  rentOrBuy : currentAdvert.rentOrBuy
 })
 
 const cancelForm = ()=>{
@@ -143,5 +160,9 @@ const updateAdvert = async ()=>{
   }
  
 }
+
+const imageComp = computed((adds)=>{
+  return `${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_HOST}/${adds}`
+})
 
 </script>

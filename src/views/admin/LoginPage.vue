@@ -55,7 +55,7 @@ const showError = ref(false)
 
 const onLogin = ()=> {
     if(loginInfo.value.email !== null || "" && loginInfo.value.password !== null || ""){
-        appAxios.post(`http://${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/login`,loginInfo.value)
+        appAxios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/login`,loginInfo.value)
     .then((login_response)=>{
         
         if(login_response.data !== null){

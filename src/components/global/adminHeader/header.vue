@@ -29,7 +29,13 @@
             >
           </li> -->
           <li class="nav-item dropdown">
-            <a class="nav-link dropbtn" href="#"
+            <RouterLink
+                  class="nav-link active"
+                  aria-current="page"
+                  to="/admin/addAdvert"
+                  >İlan ekle</RouterLink
+                >
+            <!-- <a class="nav-link dropbtn" href="#"
               >İlan ekle
               <div class="dropdown-content">
                 <RouterLink
@@ -39,9 +45,9 @@
                   >Konut</RouterLink
                 >
                 <a href="#">Arsa</a>
-                <a href="#">İşyeri</a>
-              </div>
-            </a>
+                <a href="#">İşyeri</a> -->
+              <!-- </div>
+            </a> -->
           </li>
 
           <li class="nav-item">

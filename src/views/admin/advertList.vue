@@ -4,7 +4,7 @@
     <div class="row justify-content-center" v-cloak>
       <advertTheme
         class="m-1"
-        v-for="(adds, index) in addList"
+        v-for="(adds,index) in addList"
         :key="index"
         :adds="adds"
         v-if="addList.length>0"
@@ -26,8 +26,8 @@ import eventEmitter from "@/utils/eventEmitter.js";
 let addList = ref([]);
 let page = ref(1)
 
-
-axios
+const fetchData = ()=> {
+  axios
   .get(
     `${import.meta.env.VITE_SERVER_HOST}:${
       import.meta.env.VITE_SERVER_PORT
@@ -37,6 +37,8 @@ axios
     addList.value = advert_req.data;
   })
   .catch((err) => console.log(err));
+}
+
 
 const getList = async ($state) => {
 
@@ -49,9 +51,6 @@ const response = await axios.get(
   )
 
   const data = await response.data
-
-  console.log(data)
-
   if (data.length < 10)
   {$state.complete()}
       else {
@@ -62,19 +61,6 @@ const response = await axios.get(
 
 };
 
-const updateList = ()=>{
-  axios
-  .get(
-    `${import.meta.env.VITE_SERVER_HOST}:${
-      import.meta.env.VITE_SERVER_PORT
-    }/advert`
-  )
-  .then((advert_req) => {
-    addList.value = advert_req.data;
-  })
-  .catch((err) => console.log(err));
-
-}
-
-eventEmitter.on("delete_advert", updateList);
+fetchData()
+eventEmitter.on("delete_advert", fetchData);
 </script>

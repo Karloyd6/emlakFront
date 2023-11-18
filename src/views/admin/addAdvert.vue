@@ -15,10 +15,24 @@
           <label for="price" class="form-label">Fiyat</label>
           <input type="text" v-model="newAdvert.price" class="form-control bg-secondary border-dark" id="price" placeholder="fiyat">
         </div>
-        <div class="mb-3 p-2 rounded bg-warning mt-3">
-          <label for="images" class="form-label">İlan resimleri</label>
-          <input class="form-control bg-secondary" ref="advert_images" type="file"  @change="uploadImages" id="images" multiple>
+        <div class="mb-3">
+          <label for="type" class="form-label">İlan türü</label>
+          <select id="type"  v-model="newAdvert.type" class="form-select" aria-label="Şehir seçiniz">
+              <option selected>İlan türü giriniz</option>
+              <option value="konut">Konut</option>
+              <option value="arsa">Arsa - Tarla</option>
+              <option value="isyeri">İş yeri</option>
+            </select>
         </div>
+        <div class="mb-3">
+          <label for="rentOrBut" class="form-label">İlan durumu</label>
+          <select id="rentOrBut"  v-model="newAdvert.rentOrBuy" class="form-select" aria-label="Şehir seçiniz">
+              <option selected>İlan durumu</option>
+              <option value="sale">Satılık</option>
+              <option value="rent">Kiralık</option>
+            </select>
+        </div>
+  
       </div>
       <div class="col-lg-6 col-md-12 col-sm-12">
 
@@ -71,11 +85,12 @@
 <script setup>
 import {ref} from "vue"
 import cities from "@/assets/cities/cities.json"
-import axios from "axios"
 import store from "@/store";
 import router from "@/router"
 
 const cityList = cities
+// const images = ref([])
+const currentUser = store.getters._getCurrentUser.username
 
 const newAdvert = ref({
   title : null,
@@ -87,7 +102,10 @@ const newAdvert = ref({
       hood: null,
       detail : null,
   },
-  advert_images: []
+  advert_images: [],
+  user : currentUser,
+  type : null,
+  rentOrBuy : null
 })
 
 const saveAdvert = async ()=>{
@@ -108,8 +126,9 @@ const saveAdvert = async ()=>{
   const value = await response.json()
 
   store.commit("setNewAddId",value)
+  store.commit("currentAdvert",value)
   // router.push("/admin/addimages")
-  router.push({name: "AdvertList"})
+  router.push({name: "AddImages"})
 
 }
 
