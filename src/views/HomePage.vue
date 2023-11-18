@@ -2,7 +2,7 @@
     <header class="">
       <headerItem></headerItem>
     </header>
-    <main class="">
+    <main class="container">
       <mainCarousel></mainCarousel>
       <forSaleList></forSaleList>
       <hr>

@@ -70,7 +70,7 @@ const onLogin = ()=> {
 
     })
     .catch((err) => {
-        console.log("hata",err.response.data)
+        // console.log("hata",err)
         errorMessage.value= err.response.data
 
         showError.value = true

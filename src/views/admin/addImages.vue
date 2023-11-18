@@ -3,9 +3,9 @@
   <div class="container bg-dark text-light" >
     <div class="row p-2">
       <h3 class="login-card" style="padding: 10px !important;">Mevcut resimler</h3>
-      <div class="row grid gap-2">
-      <div class="p-0 m-0" v-for="img in imagesOn" :key="img" style="width: 250px; height: 250px; position: relative;">
-        <img :src="img" alt="" style="width: inherit; position: ;">
+      <div class="row grid justify-content-start gap-2 image-container">
+      <div class="p-0 m-0 image-items " v-for="(img, index) in imagesOn" :key="index" style="width: 220px; height: 220px; position: relative;">
+        <img :src="img.url" alt="" style="width: inherit; ">
         <button class="btn btn-sm btn-danger remove-image" @click="removeImage(img)">X</button>
       </div>
     </div>
@@ -32,18 +32,47 @@ import { ref,computed, watch } from "vue";
 import appAxios from "@/utils/appAxios.js";
 import store from "@/store"
 import router from "../../router";
+import socket from "@/utils/socket.js"
 
 const images = ref({})
 let currentAdvert = store.getters._getCurrentAdvert
 const _id = currentAdvert._id
 
-const addImages= currentAdvert.advert_images
+const addImages= currentAdvert.advert_images || []
 const imagesOn = ref([]);
 
-addImages.forEach(image => {
-  imagesOn.value.push(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/${image.url}`)
-});
-console.log('images :>> ', imagesOn.value);
+console.log('addImages :>> ', addImages);
+
+const fetchData = ()=>{
+  appAxios.get(`/advert/${_id}`).then((advert_response) => {
+    const data = advert_response.data[0]
+    
+   data.advert_images.forEach(image => {
+    imagesOn.value.push({
+      name : image.name,
+      url :`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/${image.url}`})
+   });
+
+  }).catch((err) => {
+    console.log(err)
+  });
+}
+
+const removeImage=(img)=>{
+
+  imagesOn.value = imagesOn.value.filter(image => image !== img)
+
+  const deleteInfo = `/advert/delete_image/${_id}&${img.name}`
+
+  appAxios.delete(deleteInfo)
+  .then((delete_response)=>{
+    console.log(delete_response)
+  })
+  .catch(err => console.log(err))
+  
+}
+
+fetchData()
 
 const uploadImages = (e)=>{
   images.value = e.target.files
@@ -71,11 +100,10 @@ const saveImages = ()=>{
   })
   .then((upload_res)=>{
     console.log(upload_res)
-    alert("Resim yükleme işlemi başarılıdır.İlan listesine yönlendiriliyorsunuz...")
+    
 
-    setTimeout(() => {
-      router.push({name : "AdvertList"})
-    }, 2000);
+    fetchData()
+
   })
   .catch(err => console.log(err))
 
@@ -85,19 +113,9 @@ const nextTo= ()=>{
   router.push({name : "AdvertList"})
 }
 
-const removeImage = (img)=>{
-  const cutted = img.substring(22)
-  const value = addImages.filter(image => image.url == cutted)
-  const deletedItem = value[0].name
-  console.log(deletedItem)
-  appAxios.delete(`/advert/delete_image/${_id}&${deletedItem}`).then((deleteImage_res)=>{
-    console.log(deleteImage_res)
-    currentAdvert = deleteImage_res.data
-    store.commit("currentAdvert",deleteImage_res.data)
-    imagesOn.value = imagesOn.value.filter(image => image._id !== currentAdvert._id)
-    console.log(currentAdvert._id)
-  }).catch(err => console.log(err))
-}
+socket.on("mal",(data)=>{
+  console.log('data :>> ', data);
+})
 
 
 </script>
