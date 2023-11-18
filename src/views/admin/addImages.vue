@@ -1,9 +1,9 @@
 <template>
   <adminHeader></adminHeader>
   <div class="container bg-dark text-light" >
-    <div class="row p-2">
+    <div class="row p-2 justify-content-center">
       <h3 class="login-card" style="padding: 10px !important;">Mevcut resimler</h3>
-      <div class="row grid justify-content-start gap-2 image-container">
+      <div class="row grid  gap-2 image-container">
       <div class="p-0 m-0 image-items " v-for="(img, index) in imagesOn" :key="index" style="width: 220px; height: 220px; position: relative;">
         <img :src="img.url" alt="" style="width: inherit; ">
         <button class="btn btn-sm btn-danger remove-image" @click="removeImage(img)">X</button>

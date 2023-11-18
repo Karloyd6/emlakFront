@@ -159,7 +159,7 @@ body{
 
 @media (max-width: 600px) {
     .image-container{
-        
+        justify-content: center;
         display: grid;
         grid-template: auto;
     }
