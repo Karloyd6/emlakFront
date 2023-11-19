@@ -4,16 +4,49 @@
     <div class="row p-2 justify-content-center">
       <h3 class="login-card" style="padding: 10px !important;">Mevcut resimler</h3>
       <div class="row grid  gap-2 image-container">
-      <div class="p-0 m-0 image-items " v-for="(img, index) in imagesOn" :key="index" style="width: 220px; height: 220px; position: relative;">
-        <img :src="img.url" alt="" style="width: inherit; ">
+      <div class="p-0 m-0 image-items " v-for="(img, index) in imagesOn" :key="index" style="width: 230px; height: 220px; position: relative;">
+        <img :src="img.url" alt="" style="width: 230px; height: 220px; ">
         <button class="btn btn-sm btn-danger remove-image" @click="removeImage(img)">X</button>
       </div>
     </div>
-    <div class="delinator">
+    <div class="delinator mt-3">
       <div class="delinator-line"></div>
     </div>
     </div>
-    <div class="row p-2">
+<!--! MODAL AREA -->
+
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Fotoğraf ekle
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+
+        <!-- <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1> -->
+        <h3 class="login-card modal-title fs-5" id="exampleModalLabel" style="padding: 10px !important;">Yeni resim ekle</h3>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 p-2 rounded">
+        <label for="images" class="form-label">İlan resimleri</label>
+        <input class="form-control bg-secondary" ref="advert_images" type="file"  @change="uploadImages" id="images" multiple>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm btn-success" @click="saveImages">Kaydet</button>
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Kapat</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--! MODAL AREA-->
+    <!-- <div class="row p-2">
       <h3 class="login-card" style="padding: 10px !important;">Yeni resim ekle</h3>
       <div class="mb-3 p-2 rounded">
         <label for="images" class="form-label">İlan resimleri</label>
@@ -23,7 +56,7 @@
         <button class="btn btn-sm btn-success" @click="saveImages">Kaydet</button>
         <button class="btn btn-sm btn-warning" @click="nextTo">Eklemeden devam et</button>
       </div>
-    </div>
+    </div> -->
   </div>
   
 </template>
@@ -41,7 +74,7 @@ const _id = currentAdvert._id
 const addImages= currentAdvert.advert_images || []
 const imagesOn = ref([]);
 
-console.log('addImages :>> ', addImages);
+// console.log('addImages :>> ', addImages);
 
 const fetchData = ()=>{
   appAxios.get(`/advert/${_id}`).then((advert_response) => {
@@ -109,9 +142,9 @@ const saveImages = ()=>{
 
 }
 
-const nextTo= ()=>{
-  router.push({name : "AdvertList"})
-}
+// const nextTo= ()=>{
+//   router.push({name : "AdvertList"})
+// }
 
 socket.on("mal",(data)=>{
   console.log('data :>> ', data);
