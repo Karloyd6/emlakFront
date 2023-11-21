@@ -76,13 +76,13 @@
       <!--! PROFİLE İMAGE AREA -->
       <div class="d-flex mt-3">
         <div class="col-3 d-flex align-items-center">
-            <img src="http://placehold.co/100x100" style="border-radius: 50%;" alt="">
+            <img :src="showProfileImage" style="border-radius: 50%; width: 120px;height: 120px;" alt="">
         </div>
         <div class="col-9">
             <div class="mb-3 p-2 rounded d-grid">
                 <label for="images" class="form-label text-light">Profil resmi</label>
-                <input class="form-control bg-secondary" ref="advert_images" type="file"  @change="uploadImages" id="images">
-                <button class="btn btn-sm btn-secondary mt-1">profil resmini kaydet</button>
+                <input class="form-control bg-secondary" ref="profile_image" type="file"  @change="uploadImages" id="images">
+                <button class="btn btn-sm btn-secondary mt-1" @click="saveProfileImage">profil resmini kaydet</button>
             </div>
         </div>
       </div>
@@ -98,7 +98,7 @@
 <script setup>
 import { ref } from "vue";
 import store from "@/store";
-// import appAxios from "@/utils/appaAxios.js"
+import appAxios from "@/utils/appAxios.js"
 import axios from "axios"
 
 
@@ -109,6 +109,7 @@ const alertStatus = ref("");
 const profileImage = ref({});
 
 const userInfo = ref({
+    _id : user._id,
     name : user.name,
     username : user.username,
     email : user.email,
@@ -121,7 +122,20 @@ const passInfo = ref({
     newPassAgain : null
 })
 
-console.log('userInfo :>> ', userInfo.value);
+const showProfileImage = `${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/${user.profile_image}`
+
+let config = {
+    headers: {
+      'Authorization': 'Bearer ' + user?.access_token
+    }}
+
+const fetchUserData = async ()=> {
+   await appAxios.get(`/user/${user._id}`,config).then((user_response) => {
+    console.log(user_response)
+  }).catch(err => console.log(err))
+}
+
+fetchUserData()
 
 const changePassword = ()=>{
     if(passInfo.value.newPass !== passInfo.value.newPassAgain){
@@ -150,8 +164,25 @@ const changePassword = ()=>{
 
 const uploadImages = (e)=> {
     profileImage.value = e.target.files
-    console.log('profileImage.value :>> ', profileImage.value);
 }
 
+const saveProfileImage = async ()=>{
+  const _id =  user._id
+  const formdata = new FormData();
+  const data =profileImage.value;
+  formdata.set("profile_image",data[0])
+
+
+  await appAxios.post(`/user/userimage/${_id}`,formdata,{
+  Headers : {
+    "Content-Type" : "multipart/form-data",
+    'Authorization': 'Bearer ' + user?.access_token
+  }
+  }).then((upload_response)=>{
+    console.log(upload_response)
+  }).catch(err => console.log('err >> ', err))
+
+  
+}
 
 </script>

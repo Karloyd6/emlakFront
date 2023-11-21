@@ -63,8 +63,8 @@
 import { ref,computed, watch } from "vue";
 import appAxios from "@/utils/appAxios.js";
 import store from "@/store"
-import router from "../../router";
-import socket from "@/utils/socket.js"
+// import router from "../../router";
+// import socket from "@/utils/socket.js"
 
 const user = store.getters._getCurrentUser
 const images = ref({})
