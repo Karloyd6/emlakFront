@@ -70,9 +70,36 @@
           <button class="btn btn-success btn-sm mb-1" @click="modify">
             Düzenle
           </button>
+          <button class="btn btn-danger btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            İlanı kaldır
+          </button>
         </div>
       </div>
     </div>
+
+    //? MODAL AREA ///////
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+
+        <h3 class="login-card modal-title fs-5" id="exampleModalLabel" style="padding: 10px !important;">İlanı kaldır</h3>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h5 class="text-warning">İlanı tamamen kaldırmak istediğinize emin misiniz?</h5>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm btn-danger" data-bs-dismiss="modal" @click="deleteAdvert">İlanı sil</button>
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    //? MODAL AREA ///////
   </div>
   <footerItem></footerItem>
 </template>
@@ -81,6 +108,7 @@
 import store from "@/store";
 import router from "@/router";
 import { computed, ref } from "vue";
+import appAxios from "@/utils/appAxios.js";
 
 const currentAdvert = store.getters._getCurrentAdvert;
 const addImages = currentAdvert.advert_images;
@@ -105,6 +133,15 @@ const modifyImages = () => {
 const modify = () => {
   router.push({ name: "EditAdvert" });
 };
+
+const deleteAdvert = ()=>{
+    appAxios.delete(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/advert/${currentAdvert._id}`).then((delete_req)=>{
+
+      // eventEmitter.emit("delete_advert")
+      router.push({name : "AdvertList"})
+
+    }).catch(err => console.log(err))
+}
 
 console.log(currentAdvert.adress);
 </script>

@@ -15,7 +15,12 @@ export default {
             return state.user
         },
         _isAuthenticate(state){
-            return state.user !== null ? true : false
+            if(state.user == null){
+                return false;
+            }else{
+                return true;
+            }
+            // return state.user !== null ? true : false
         }
     }
 }

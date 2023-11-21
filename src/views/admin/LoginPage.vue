@@ -36,7 +36,7 @@
     </div>
 </template>
 <script setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import appAxios from "@/utils/appAxios.js";
 import store from "@/store";
 import router from "@/router"
@@ -53,16 +53,22 @@ const errorMessage = ref("")
 
 const showError = ref(false)
 
-const onLogin = ()=> {
+const onLogin = async ()=> {
     if(loginInfo.value.email !== null || "" && loginInfo.value.password !== null || ""){
-        appAxios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/login`,loginInfo.value)
-    .then((login_response)=>{
-        
+
+    
+
+        await appAxios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/login`,loginInfo.value)
+        .then((login_response)=>{
+        console.log(login_response)
         if(login_response.data !== null){
             console.log(login_response.data)
 
             store.commit("currentUser",login_response.data)
-            router.push({name : "AdvertList"})
+            setTimeout(() => {
+                router.push({name : "AdvertList"})
+            }, 1000);
+            
 
         }else{
             console.log(login_response)
@@ -70,8 +76,7 @@ const onLogin = ()=> {
 
     })
     .catch((err) => {
-        // console.log("hata",err)
-        errorMessage.value= err.response.data
+        errorMessage.value= err
 
         showError.value = true
 

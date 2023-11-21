@@ -22,16 +22,23 @@ import axios from "axios";
 import advertTheme from "@/views/admin/advertTheme/advertTheme.vue";
 import { ref } from "vue";
 import eventEmitter from "@/utils/eventEmitter.js";
+import store from "@/store"
 
 let addList = ref([]);
 let page = ref(1)
+const user = store.getters._getCurrentUser
+let config = {
+    headers: {
+      'Authorization': 'Bearer ' + user?.access_token
+    }}
 
 const fetchData = ()=> {
+
   axios
   .get(
     `${import.meta.env.VITE_SERVER_HOST}:${
       import.meta.env.VITE_SERVER_PORT
-    }/advert`
+    }/advert`,config,
   )
   .then((advert_req) => {
     addList.value = advert_req.data;
@@ -47,7 +54,7 @@ const getList = async ($state) => {
 const response = await axios.get(
     `${import.meta.env.VITE_SERVER_HOST}:${
       import.meta.env.VITE_SERVER_PORT
-    }/advert`
+    }/advert`,config
   )
 
   const data = await response.data

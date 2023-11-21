@@ -98,7 +98,8 @@ const currentAddId = currentAdvert._id
 console.log(currentAddId)
 const errorMessage = ref("")
 const errorClass= ref("alert-warning");
-const showError = ref(false)
+const showError = ref(false);
+const user = store.getters._getCurrentUser
 
 const newAdvert = ref({
   title : currentAdvert.title,
@@ -131,7 +132,8 @@ const updateAdvert = async ()=>{
     method : "POST",
     mode: "cors",
     headers : {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer ' + user?.access_token
     },
     body: JSON.stringify(newAdvert.value)
   })
@@ -160,9 +162,4 @@ const updateAdvert = async ()=>{
   }
  
 }
-
-const imageComp = computed((adds)=>{
-  return `${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_HOST}/${adds}`
-})
-
 </script>

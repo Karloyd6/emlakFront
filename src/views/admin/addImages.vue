@@ -26,7 +26,6 @@
     <div class="modal-content bg-dark">
       <div class="modal-header">
 
-        <!-- <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1> -->
         <h3 class="login-card modal-title fs-5" id="exampleModalLabel" style="padding: 10px !important;">Yeni resim ekle</h3>
 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -67,6 +66,7 @@ import store from "@/store"
 import router from "../../router";
 import socket from "@/utils/socket.js"
 
+const user = store.getters._getCurrentUser
 const images = ref({})
 let currentAdvert = store.getters._getCurrentAdvert
 const _id = currentAdvert._id
@@ -74,10 +74,16 @@ const _id = currentAdvert._id
 const addImages= currentAdvert.advert_images || []
 const imagesOn = ref([]);
 
+let config={
+  header : {
+    'Authorization': 'Bearer ' + user?.access_token
+  }
+}
+
 // console.log('addImages :>> ', addImages);
 
 const fetchData = ()=>{
-  appAxios.get(`/advert/${_id}`).then((advert_response) => {
+  appAxios.get(`/advert/${_id}`,config).then((advert_response) => {
     const data = advert_response.data[0]
     
    data.advert_images.forEach(image => {
@@ -97,7 +103,7 @@ const removeImage=(img)=>{
 
   const deleteInfo = `/advert/delete_image/${_id}&${img.name}`
 
-  appAxios.delete(deleteInfo)
+  appAxios.delete(deleteInfo,config)
   .then((delete_response)=>{
     console.log(delete_response)
   })
@@ -112,7 +118,7 @@ const uploadImages = (e)=>{
   
 }
 
-const saveImages = ()=>{
+const saveImages = async ()=>{
   const formdata = new FormData()
 
   const data = images.value
@@ -122,33 +128,22 @@ const saveImages = ()=>{
     let file = data[i]
 
     formdata.append("advert_images",file)
+
+  }  
+
+    //? ////POSTDATA//////////
+  await appAxios.post(`/advert/image_uploads/${_id}`,formdata,{
+  Headers : {
+    "Content-Type" : "multipart/form-data",
+    'Authorization': 'Bearer ' + user?.access_token
   }
-
-  console.log("forms",formdata)
-
-  appAxios.post(`/advert/image_uploads/${_id}`,formdata,{
-    Headers : {
-      "Content-Type" : "multipart/form-data"
-    }
   })
   .then((upload_res)=>{
     console.log(upload_res)
     
-
-    fetchData()
-
   })
   .catch(err => console.log(err))
-
+  imagesOn.value= []
+  fetchData()
 }
-
-// const nextTo= ()=>{
-//   router.push({name : "AdvertList"})
-// }
-
-socket.on("mal",(data)=>{
-  console.log('data :>> ', data);
-})
-
-
 </script>

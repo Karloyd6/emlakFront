@@ -61,7 +61,11 @@
           </li>
         </ul>
         <div class="col d-flex justify-content-end">
-          <span class="text-light me-3">{{ currentUser }}</span>
+          <span class=" me-3 profile_info">
+            <RouterLink class="router-link" to="/admin/editprofile">{{ currentUser }}</RouterLink>
+          </span>
+          
+          
           <button
             class="btn btn-sm btn-dark mr-3"
             v-if="isAuthenticate"
@@ -97,5 +101,5 @@ const toLogout = () => {
   router.push({ name: "LoginPage" });
 };
 
-const currentUser = computed(() => store.getters._getCurrentUser.name);
+const currentUser = computed(() => store.getters._getCurrentUser?.name);
 </script>

@@ -19,7 +19,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, _, next) => {
-    const authRequiredRoutes = ["AddImages","AdvertList","AdvertDetails","EditAdvert"];
+    const authRequiredRoutes = ["AddImages","AdvertList","AdvertDetails","EditAdvert","EditProfile"];
     const authNotRequiredRoutes = ["LoginPage", "RegisterPage"];
     const _isAuthenticated = store.getters._isAuthenticate;
   

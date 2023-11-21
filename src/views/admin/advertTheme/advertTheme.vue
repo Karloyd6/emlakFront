@@ -1,7 +1,8 @@
 <template>
   <div class="card p-0 d-flex" style="width: 22rem">
     <img :src="advertImage" class="card-img-top" :alt="advertImage" />
-    <div class="card-body" style="height: 100%;">
+    <div class="card-body row" style="height: 100%;">
+      <small class="opacity-75">İlan no: {{ advert._id }}</small>
       <h5 class="card-title">{{ advert.title }}</h5>
       
       <small class="card-text">
@@ -11,18 +12,19 @@
       <h5 class="text-bold">{{ advert.price }}</h5>
       <hr />
 
-      <div class="row p-1 d-grid mt-1" style="position: fixed bottom">
+      
+    </div>
+    <div class="card-body p-1 d-grid mt-1" style="bottom: 0px; width: inherit; position: relative;">
         <button class="btn btn-primary btn-sm mb-1" @click="details">
           Görüntüle
         </button>
-        <button class="btn btn-primary btn-sm mb-1" @click="modifyImages">
+        <!-- <button class="btn btn-primary btn-sm mb-1" @click="modifyImages">
           Görsel ekle/kaldır
         </button>
         <button class="btn btn-success btn-sm mb-1" @click="modify">
           Düzenle
-        </button>
+        </button> -->
       </div>
-    </div>
   </div>
 </template>
 <script setup>

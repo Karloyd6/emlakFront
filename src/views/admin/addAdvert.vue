@@ -9,7 +9,8 @@
         </div>
         <div class="mb-3">
           <label for="description" class="form-label">İlan açıklaması</label>
-          <input type="text" v-model="newAdvert.description" class="form-control bg-secondary border-dark" id="description" placeholder="ilan açıklaması">
+          <textarea  v-model="newAdvert.description" class="form-control bg-secondary border-dark" id="description" placeholder="ilan açıklaması">
+            </textarea>
         </div>
         <div class="mb-3">
           <label for="price" class="form-label">Fiyat</label>
@@ -68,7 +69,6 @@
           </div>
         </div>
 
-
       </div>
     </div>
     
@@ -91,6 +91,7 @@ import router from "@/router"
 const cityList = cities
 // const images = ref([])
 const currentUser = store.getters._getCurrentUser.username
+const user = store.getters._getCurrentUser
 
 const newAdvert = ref({
   title : null,
@@ -109,7 +110,7 @@ const newAdvert = ref({
 })
 
 const saveAdvert = async ()=>{
-
+  
   newAdvert.value.adress.city = newAdvert.value.adress.city?.name
 
   const response = await fetch(`${import.meta.env.VITE_SERVER_HOST}:${
@@ -118,11 +119,13 @@ const saveAdvert = async ()=>{
     method : "POST",
     mode: "cors",
     headers : {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer ' + user?.access_token
     },
     body: JSON.stringify(newAdvert.value)
   })
 
+  
   const value = await response.json()
 
   store.commit("setNewAddId",value)
