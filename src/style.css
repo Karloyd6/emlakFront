@@ -195,6 +195,8 @@ body{
     background-color: #1d1d1d;
     color: #777711;
     padding: 3px;
+    border-radius: 3px;
+    padding: 4px;
 }
 
 .profile_info:hover {
@@ -215,6 +217,24 @@ body{
 .router-link{
     text-decoration: none !important;
     color: #1d1d1d;
+}
+
+.my-nav{
+    display: flex;
+    align-items: center;
+}
+.my-nav-list{
+    display: flex;
+    align-items: center;
+}
+.my-link {
+    text-decoration: none;
+    color: var(--ccream);
+}
+.my-nav-item{
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
 }
 
 

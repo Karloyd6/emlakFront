@@ -309,6 +309,7 @@ const saveProfileImage =  ()=>{
   }).then((upload_response)=>{
     userInfo.value.profile_image = upload_response.data
     showAlert.value=true;
+    alertStatus.value = "alert-success"
     alertMessage.value = "resim başarılı bir şekilde güncellendi"
 
     setTimeout(() => {
