@@ -20,38 +20,17 @@
               >İlan listesi</RouterLink
             >
           </li>
-          <!-- <li class="nav-item">
-            <RouterLink
-              class="nav-link active"
-              aria-current="page"
-              to="/admin/addAdvert"
-              >İlan ekle</RouterLink
-            >
-          </li> -->
           <li class="nav-item dropdown">
+            
+          </li>
+
+          <li class="nav-item">
             <RouterLink
                   class="nav-link active"
                   aria-current="page"
                   to="/admin/addAdvert"
                   >İlan ekle</RouterLink
                 >
-            <!-- <a class="nav-link dropbtn" href="#"
-              >İlan ekle
-              <div class="dropdown-content">
-                <RouterLink
-                  class="nav-link active"
-                  aria-current="page"
-                  to="/admin/addAdvert"
-                  >Konut</RouterLink
-                >
-                <a href="#">Arsa</a>
-                <a href="#">İşyeri</a> -->
-              <!-- </div>
-            </a> -->
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Pricing</a>

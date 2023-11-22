@@ -42,7 +42,6 @@ import store from "@/store";
 import router from "@/router"
 
 const passStatus = ref(false)
-// const formControl = ref(false)
 
 const loginInfo = ref({
     email : null,
@@ -56,13 +55,9 @@ const showError = ref(false)
 const onLogin = async ()=> {
     if(loginInfo.value.email !== null || "" && loginInfo.value.password !== null || ""){
 
-    
-
         await appAxios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/login`,loginInfo.value)
         .then((login_response)=>{
-        console.log(login_response)
         if(login_response.data !== null){
-            console.log(login_response.data)
 
             store.commit("currentUser",login_response.data)
             setTimeout(() => {
@@ -76,8 +71,7 @@ const onLogin = async ()=> {
 
     })
     .catch((err) => {
-        errorMessage.value= err
-
+        errorMessage.value= err.response.data
         showError.value = true
 
         setTimeout(() => {

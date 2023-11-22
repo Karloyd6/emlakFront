@@ -77,7 +77,7 @@
       </div>
     </div>
 
-    //? MODAL AREA ///////
+    <!-- MODAL AREA ///////-->
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -98,8 +98,7 @@
     </div>
   </div>
 </div>
-
-    //? MODAL AREA ///////
+<!-- MODAL AREA ///////-->
   </div>
   <footerItem></footerItem>
 </template>
@@ -137,11 +136,9 @@ const modify = () => {
 const deleteAdvert = ()=>{
     appAxios.delete(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/advert/${currentAdvert._id}`).then((delete_req)=>{
 
-      // eventEmitter.emit("delete_advert")
       router.push({name : "AdvertList"})
 
     }).catch(err => console.log(err))
 }
 
-console.log(currentAdvert.adress);
 </script>

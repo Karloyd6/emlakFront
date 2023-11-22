@@ -18,43 +18,22 @@
         <button class="btn btn-primary btn-sm mb-1" @click="details">
           Görüntüle
         </button>
-        <!-- <button class="btn btn-primary btn-sm mb-1" @click="modifyImages">
-          Görsel ekle/kaldır
-        </button>
-        <button class="btn btn-success btn-sm mb-1" @click="modify">
-          Düzenle
-        </button> -->
+
       </div>
   </div>
 </template>
 <script setup>
 import router from "@/router";
 import store from "@/store";
-import axios from "axios";
-import eventEmitter from "@/utils/eventEmitter.js";
 import { computed } from "vue";
 
 const props = defineProps({ adds: Object });
 const advert = props.adds;
 
 const details = () => {
-  console.log(advert._id);
   store.commit("currentAdvert", advert);
   router.push({ name: "AdvertDetails" });
 };
-
-const modify = () => {
-  store.commit("currentAdvert", advert);
-  router.push({ name: "EditAdvert" });
-};
-
-// const deleteAdvert = ()=>{
-//     axios.delete(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/advert/${advert._id}`).then((delete_req)=>{
-
-//         eventEmitter.emit("delete_advert")
-
-//     }).catch(err => console.log(err))
-// }
 
 const advertImage = computed(() => {
   return advert.advert_images.length !== 0
@@ -64,10 +43,4 @@ const advertImage = computed(() => {
     : "https://placehold.co/100x100";
 });
 
-
-
-const modifyImages = () => {
-  store.commit("currentAdvert", advert);
-  router.push({ name: "AddImages" });
-};
 </script>

@@ -157,11 +157,14 @@ body{
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 620px) {
     .image-container{
         justify-content: center;
         display: grid;
         grid-template: auto;
+    }
+    .welcome-page {
+        background-size: cover;
     }
   
     .image-items {
@@ -179,22 +182,16 @@ body{
         height: fit-content;
     }
 
-    /* .image-items:hover .remove-image {
-        display: block;
-        position: absolute;
-        top : 50%;
-        left: 50%;
-    } */
-
     .remove-image {
         width: 2.2rem;
         height: 2.2rem;
         top: 2px;
         left: 0px;
     }
+  
 } 
 
-.proprofile_info {
+.profile_info {
     background-color: #1d1d1d;
     color: #777711;
     padding: 3px;
@@ -219,6 +216,8 @@ body{
     text-decoration: none !important;
     color: #1d1d1d;
 }
+
+
 
 /**
   GLASS EFFECT

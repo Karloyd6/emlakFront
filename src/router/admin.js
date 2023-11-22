@@ -33,6 +33,11 @@ const adminRoutes = [
         name : "EditProfile",
         path : "/admin/editprofile",
         component : ()=> import("@/views/admin/editProfile.vue")
+    },
+    {
+        name : "AddUser",
+        path : "/admin/addUser",
+        component : ()=> import("@/views/admin/addUser.vue")
     }
 ]
 

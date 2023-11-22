@@ -2,6 +2,7 @@
   <adminHeader></adminHeader>
   <div class="container bg-dark text-light pt-3">
     <div class="row">
+      <h3 class="bg-dark text-light opacity-50">Yeni ilan ekle</h3>
       <div class="col-lg-6 col-md-12 col-sm-12">
         <div class="mb-3">
           <label for="title" class="form-label">İlan başlığı</label>

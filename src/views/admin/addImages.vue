@@ -3,12 +3,18 @@
   <div class="container bg-dark text-light" >
     <div class="row p-2 justify-content-center">
       <h3 class="login-card" style="padding: 10px !important;">Mevcut resimler</h3>
+      
       <div class="row grid  gap-2 image-container">
       <div class="p-0 m-0 image-items " v-for="(img, index) in imagesOn" :key="index" style="width: 230px; height: 220px; position: relative;">
         <img :src="img.url" alt="" style="width: 230px; height: 220px; ">
         <button class="btn btn-sm btn-danger remove-image" @click="removeImage(img)">X</button>
       </div>
     </div>
+
+    <!----------ALERT------------>
+    <div class="alert my-3" :class="alertStatus" v-if="showAlert">{{ alertMessage }}</div>
+    <!----------ALERT------------>
+
     <div class="delinator mt-3">
       <div class="delinator-line"></div>
     </div>
@@ -80,7 +86,14 @@ let config={
   }
 }
 
-// console.log('addImages :>> ', addImages);
+
+//! ALERT AREA ///////
+
+const showAlert = ref(false);
+const alertMessage = ref("");
+const alertStatus = ref("alert-warning")
+
+//! ALERT AREA ///////
 
 const fetchData = ()=>{
   appAxios.get(`/advert/${_id}`,config).then((advert_response) => {
@@ -105,7 +118,15 @@ const removeImage=(img)=>{
 
   appAxios.delete(deleteInfo,config)
   .then((delete_response)=>{
-    console.log(delete_response)
+
+    showAlert.value= true;
+    alertMessage.value = "Resim silinmiştir";
+    alertStatus.value = "alert-success"
+
+    setTimeout(() => {
+      showAlert.value = false
+    }, 2000);
+    
   })
   .catch(err => console.log(err))
   
@@ -139,8 +160,13 @@ const saveImages = async ()=>{
   }
   })
   .then((upload_res)=>{
-    console.log(upload_res)
-    
+    showAlert.value= true;
+    alertMessage.value = upload_res.data;
+    alertStatus.value = "alert-success"
+
+    setTimeout(() => {
+      showAlert.value = false
+    }, 2000);
   })
   .catch(err => console.log(err))
   imagesOn.value= []
