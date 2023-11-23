@@ -1,6 +1,7 @@
 export default {
+    namespaced :true,
     state : {
-        user : null,
+        user : {},
     },
     mutations : {
         currentUser(state,user){
@@ -15,12 +16,13 @@ export default {
             return state.user
         },
         _isAuthenticate(state){
-            if(state.user == null){
-                return false;
-            }else{
-                return true;
-            }
-            // return state.user !== null ? true : false
+     
+            return state.user !== null ? true : false
+        }
+    },
+    actions : {
+        async currentUser(context, payload){
+            await context.commit("currentUser",payload)
         }
     }
 }

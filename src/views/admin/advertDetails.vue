@@ -73,6 +73,9 @@
           <button class="btn btn-danger btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
             İlanı kaldır
           </button>
+          <button class="btn btn-secondary btn-sm mb-1" @click="giveUp">
+            Vazgeç
+          </button>
         </div>
       </div>
     </div>
@@ -139,6 +142,10 @@ const deleteAdvert = ()=>{
       router.push({name : "AdvertList"})
 
     }).catch(err => console.log(err))
+}
+
+const giveUp = ()=>{
+  router.push({name : "AdvertList"})
 }
 
 </script>

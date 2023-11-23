@@ -69,7 +69,7 @@
           aria-describedby="phone"
         />
         <button class="btn btn-sm btn-primary" @click="addNumber">ekle</button>
-        <button class="btn btn-sm btn-danger" @click="">sil</button>
+        <!-- <button class="btn btn-sm btn-danger" @click="">sil</button> -->
       </div>
 
 
@@ -205,7 +205,7 @@ import appAxios from "@/utils/appAxios.js"
 import axios from "axios"
 import router from "@/router"
 
-const user = store.getters._getCurrentUser;
+const user = computed(()=> store.getters._getCurrentUser);
 const showError = ref(false);
 const errorMessage = ref("");
 const alertStatus = ref("");
@@ -303,8 +303,8 @@ const saveProfileImage =  ()=>{
 
   appAxios.post(`/user/userimage/${_id}`,formdata,{
   Headers : {
+    // 'Authorization': 'Bearer ' + user?.access_token,
     "Content-Type" : "multipart/form-data",
-    'Authorization': 'Bearer ' + user?.access_token
   }
   }).then((upload_response)=>{
     userInfo.value.profile_image = upload_response.data
@@ -329,8 +329,6 @@ const saveProfileImage =  ()=>{
 
 const saveUserForm = async ()=> {
 
-
-
   const savedUser = {
     name :userInfo.value.name,
     username : userInfo.value.username,
@@ -339,10 +337,10 @@ const saveUserForm = async ()=> {
   }
 
   const response = await axios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/update/${userInfo.value._id}`,
-  savedUser,{
+  savedUser, {
     Headers : {
       "Content-Type" : "application/json",
-      "Authorization" : "bearer " + user.access_token
+      "Authorization" : `bearer ${user.access_token}`
     }
   })
 

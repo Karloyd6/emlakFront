@@ -27,7 +27,7 @@
                 {{errorMessage}}
             </div>
             <div class="row mt-3">
-                <div class="col">
+                <div class="col dropdown-item">
                     <a href="" >Şifremi unuttum</a>
                 </div>
             </div>
@@ -55,11 +55,11 @@ const showError = ref(false)
 const onLogin = async ()=> {
     if(loginInfo.value.email !== null || "" && loginInfo.value.password !== null || ""){
 
-        await appAxios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/login`,loginInfo.value)
-        .then((login_response)=>{
+        appAxios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/login`,loginInfo.value).then((login_response)=>{
         if(login_response.data !== null){
-
-            store.commit("currentUser",login_response.data)
+            // console.log(login_response.data.name)
+            const payload = login_response.data
+            store.dispatch("currentUser",payload)
             setTimeout(() => {
                 router.push({name : "AdvertList"})
             }, 1000);
@@ -78,6 +78,9 @@ const onLogin = async ()=> {
             showError.value= false
         }, 3000);
     })
+
+      
+        
     }else{
         errorMessage.value = {"hata" : "Lütfen bütün alanları doldurunuz"}
         showError.value= true;

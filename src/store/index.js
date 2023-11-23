@@ -8,12 +8,13 @@ const vuexPersister = new VuexPersister({
 })
 
 const store = createStore({
+    namespaced :true,
     state : {
     
     },
     modules : {
-       advert,
-       user
+       ...advert,
+       ...user
     },
     plugins : [vuexPersister.persist]
 })

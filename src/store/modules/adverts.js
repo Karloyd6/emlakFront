@@ -1,7 +1,9 @@
 export default  {
+    namespaced : true,
     state : {
         advert : {},
-        newAddId : ""
+        newAddId : "",
+        advertList : []
     },
     mutations : {
         currentAdvert(state,advert){
@@ -9,6 +11,9 @@ export default  {
         },
         setNewAddId(state,id){
             state.newAddId = id
+        },
+        setAdvertList(state,advertList){
+            state.advertList = advertList
         }
     },
     getters : {

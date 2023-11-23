@@ -13,17 +13,9 @@
         <div class="col">
              <!--! FOR SALE LİST AREA-->
     <div class="row row-cols-auto">
-        <div class="col"></div>
+        <div class="col d-flex"></div>
       <!--* EXAMPLE ADVERT -->
-                <!-- <div class="card m-3" style="width: 18rem">
-                    <img src="..." class="card-img-top" alt="..." />
-                    <div class="card-body">
-                    <p class="card-text">
-                        Some quick example text to build on the card title and make up the
-                        bulk of the card's content.
-                    </p>
-                    </div>
-                </div> -->
+                <!-- <item :advert="adds" v-for="(adds,index) in placehold" :key="index"></item> -->
       <!--* EXAMPLE ADVERT -->
     </div>
     <!--! END OF FOR SALE LİST AREA-->
@@ -38,3 +30,17 @@
     </div>
   </div>
 </template>
+<script setup>
+    import item from "@/components/global/forSaleItem.vue";
+    import appAxios from "@/utils/appAxios.js"
+
+    const fetchData = ()=>{
+        appAxios.get("/advert").then((db_response)=>{
+            // console.log(db_response.data)
+        })
+    }
+    
+    fetchData()
+
+    
+</script>
