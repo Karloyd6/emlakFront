@@ -8,13 +8,21 @@ const vuexPersister = new VuexPersister({
 })
 
 const store = createStore({
+<<<<<<< HEAD
     
+=======
+>>>>>>> parent of afccb34 (header sidebar vs yapıldı loginde vuex hatası)
     state : {
     
     },
     modules : {
+<<<<<<< HEAD
         ...advert,
         ...user
+=======
+       advert,
+       user
+>>>>>>> parent of afccb34 (header sidebar vs yapıldı loginde vuex hatası)
     },
     plugins : [vuexPersister.persist]
 })

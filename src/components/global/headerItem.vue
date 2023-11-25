@@ -1,20 +1,6 @@
 <template>
-<<<<<<< HEAD
   <nav class="navbar navbar-expand-lg bg-body-tertiary ">
   <div class="container-fluid ">
-=======
-  <nav class="navbar bg-dark mb-3 ">
-    <div class="container-fluid  d-flex justify-content-between align-items-center">
-      <span class="navbar-brand text-light mb-0 h1">KILINÇ Emlak</span>
-    
-      <div class="">
-        <ul>
-          <li>
-            <router-link to="/">sdfsdf</router-link>
-          </li>
-        </ul>
-      </div>
->>>>>>> parent of 248cde9 (navbar çalışmaları; style vs)
 
    <div class="d-flex align-items-center">
     <a class="navbar-brand" href="#">KILINÇ Emlak</a>

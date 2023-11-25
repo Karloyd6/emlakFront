@@ -12,7 +12,6 @@ import store from "@/store"
 import eventEmitter from '@/utils/eventEmitter';
 import InfiniteLoading from "v3-infinite-loading";
 import "v3-infinite-loading/lib/style.css";
-import sidebar from "@/components/sidebar.vue"
 
 
 
@@ -21,7 +20,6 @@ app.use(router);
 app.use(store)
 app.use(eventEmitter)
 app.config.globalProperties.$store = store;
-app.component("sidebar",sidebar)
 app.component("infiniteLoading",InfiniteLoading)
 app.component("adminHeader",adminHeader)
 app.component("headerItem",headerItem);

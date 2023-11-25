@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-secondary text-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">KILINÇ Emlak</a>
+      <a class="navbar-brand" href="#">Navbar</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -32,7 +32,12 @@
                   >İlan ekle</RouterLink
                 >
           </li>
-        
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          </li>
         </ul>
         <div class="col d-flex justify-content-end">
           <span class=" me-3 profile_info">

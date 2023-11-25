@@ -27,7 +27,7 @@
                 {{errorMessage}}
             </div>
             <div class="row mt-3">
-                <div class="col dropdown-item">
+                <div class="col">
                     <a href="" >Şifremi unuttum</a>
                 </div>
             </div>
@@ -57,12 +57,20 @@ const showError = ref(false)
 const onLogin = async ()=> {
     if(loginInfo.value.email && loginInfo.value.password){
 
+<<<<<<< HEAD
         await appAxios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/login`,loginInfo.value).then((login_response)=>{
         if(login_response.data){
             console.log(login_response.data)
             const user = login_response?.data || {}
             store.dispatch('currentUser',user)
         
+=======
+        await appAxios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/login`,loginInfo.value)
+        .then((login_response)=>{
+        if(login_response.data !== null){
+
+            store.commit("currentUser",login_response.data)
+>>>>>>> parent of afccb34 (header sidebar vs yapıldı loginde vuex hatası)
             setTimeout(() => {
                 router.push({name : "AdvertList"})
             }, 1000);

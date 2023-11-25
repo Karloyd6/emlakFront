@@ -1,7 +1,10 @@
 export default {
+<<<<<<< HEAD
     // namespaced: true,
+=======
+>>>>>>> parent of afccb34 (header sidebar vs yapıldı loginde vuex hatası)
     state : {
-        user : {},
+        user : null,
     },
     mutations : {
         currentUser(state,user){
@@ -16,6 +19,7 @@ export default {
             return state.user
         },
         _isAuthenticate(state){
+<<<<<<< HEAD
             if(state.user !== null){
                 return true
             }
@@ -26,6 +30,14 @@ export default {
     actions : {
         currentUser(context, payload){
            context.commit("currentUser",payload)
+=======
+            if(state.user == null){
+                return false;
+            }else{
+                return true;
+            }
+            // return state.user !== null ? true : false
+>>>>>>> parent of afccb34 (header sidebar vs yapıldı loginde vuex hatası)
         }
     }
 }
