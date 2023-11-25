@@ -20,13 +20,13 @@
 
 import axios from "axios";
 import advertTheme from "@/views/admin/advertTheme/advertTheme.vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import eventEmitter from "@/utils/eventEmitter.js";
 import store from "@/store"
 
 let addList = ref([]);
 let page = ref(1)
-const user = store.getters._getCurrentUser
+const user = computed(()=>store.getters._getCurrentUser)
 let config = {
     headers: {
       'Authorization': 'Bearer ' + user?.access_token

@@ -35,8 +35,8 @@
         
         </ul>
         <div class="col d-flex justify-content-end">
-          <span class=" me-3 profile_info ">
-            <RouterLink class="router-link text-light" to="/admin/editprofile">{{ currentUser }}</RouterLink>
+          <span class=" me-3 profile_info">
+            <RouterLink class="router-link" to="/admin/editprofile">{{ currentUser }}</RouterLink>
           </span>
           
           

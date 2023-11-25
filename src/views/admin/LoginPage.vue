@@ -40,6 +40,8 @@ import { ref } from "vue";
 import appAxios from "@/utils/appAxios.js";
 import store from "@/store";
 import router from "@/router"
+// import { useStore } from "vuex";
+// const store = useStore()
 
 const passStatus = ref(false)
 
@@ -53,13 +55,14 @@ const errorMessage = ref("")
 const showError = ref(false)
 
 const onLogin = async ()=> {
-    if(loginInfo.value.email !== null || "" && loginInfo.value.password !== null || ""){
+    if(loginInfo.value.email && loginInfo.value.password){
 
-        appAxios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/login`,loginInfo.value).then((login_response)=>{
-        if(login_response.data !== null){
-            // console.log(login_response.data.name)
-            const payload = login_response.data
-            store.dispatch("currentUser",payload)
+        await appAxios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/login`,loginInfo.value).then((login_response)=>{
+        if(login_response.data){
+            console.log(login_response.data)
+            const user = login_response?.data || {}
+            store.dispatch('currentUser',user)
+        
             setTimeout(() => {
                 router.push({name : "AdvertList"})
             }, 1000);
@@ -68,7 +71,7 @@ const onLogin = async ()=> {
         }else{
             console.log(login_response)
         }
-
+        
     })
     .catch((err) => {
         errorMessage.value= err.response.data
@@ -78,9 +81,6 @@ const onLogin = async ()=> {
             showError.value= false
         }, 3000);
     })
-
-      
-        
     }else{
         errorMessage.value = {"hata" : "Lütfen bütün alanları doldurunuz"}
         showError.value= true;
@@ -88,7 +88,6 @@ const onLogin = async ()=> {
             showError.value= false
         }, 3000);
     }
-
 }
 
 const showPass = ()=>{

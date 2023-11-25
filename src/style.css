@@ -93,8 +93,6 @@
     background-color: #1d1d1d;
     color: #777711;
     padding: 3px;
-    border-radius: 3px;
-    padding: 4px;
 }
 
 .profile_info:hover {
@@ -117,6 +115,7 @@
     color: #1d1d1d;
 }
 
+<<<<<<< HEAD
 
 /* .active{
     font-weight: 500 !important;
@@ -135,6 +134,8 @@
     background-color: #dfdfdf;
     user-select: none;
 }
+=======
+>>>>>>> parent of 248cde9 (navbar çalışmaları; style vs)
 
 .my-drop:hover .my-list-contain{
     background-color: #fcfcfc;
