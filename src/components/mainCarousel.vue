@@ -1,35 +1,29 @@
 <template>
- <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="http://placehold.co/600x250" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block text-dark">
-        <h5>First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
-      </div>
+  <div class=" main-bg d-flex justify-content-center align-items-center">
+    
+    <div class="search-bar ">
+        <input type="text" class="form-control form-control-sm" id="exampleFormControlInput1" placeholder="İlanlarda ara">
+
+      <select class="form-select form-select-sm" aria-label="Small select example">
+        <option selected>Emlak Tipi</option>
+        <option value="1">Konut</option>
+        <option value="2">Arsa</option>
+        <option value="3">İşyeri</option>
+      </select>
+
+      <select class="form-select form-select-sm" aria-label="Small select example">
+        <option selected>Satılık & Kiralık</option>
+        <option value="1">Satılık</option>
+        <option value="2">Kiralık</option>
+      </select>
+
+        <button class="btn btn-warning btn-sm" ><i class="fa-solid fa-magnifying-glass me-2"></i>İlanlarda ara</button>
     </div>
-    <div class="carousel-item">
-      <img src="http://placehold.co/600x250" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block text-dark">
-        <h5>First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="http://placehold.co/600x250" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block text-dark">
-        <h5>First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
-      </div>
-    </div>
+
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
 </template>
+
+<script setup>
+
+  
+</script>

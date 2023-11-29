@@ -40,8 +40,8 @@
           </li>
         </ul>
         <div class="col d-flex justify-content-end">
-          <span class=" me-3 profile_info">
-            <RouterLink class="router-link" to="/admin/editprofile">{{ currentUser }}</RouterLink>
+          <span class=" me-3 profile_info text-light">
+            <RouterLink class="router-link text-light" to="/admin/editprofile">{{ currentUser }}</RouterLink>
           </span>
           
           
@@ -67,10 +67,7 @@ import router from "@/router";
 import store from "@/store";
 import { RouterLink } from "vue-router";
 
-const isAuthenticate = computed(() => {
-  return store.getters._isAuthenticate;
-});
-
+const isAuthenticate = store.getters._isAuthenticate
 const toLogin = () => {
   router.push({ name: "LoginPage" });
 };
@@ -80,5 +77,5 @@ const toLogout = () => {
   router.push({ name: "LoginPage" });
 };
 
-const currentUser = computed(() => store.getters._getCurrentUser?.name);
+const currentUser = store.getters._getCurrentUser?.name
 </script>

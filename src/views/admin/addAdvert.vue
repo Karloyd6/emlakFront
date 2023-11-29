@@ -84,14 +84,13 @@
   </div>
 </template>
 <script setup>
-import {ref} from "vue"
+import {computed, ref} from "vue"
 import cities from "@/assets/cities/cities.json"
 import store from "@/store";
 import router from "@/router"
 
 const cityList = cities
-// const images = ref([])
-const currentUser = store.getters._getCurrentUser.username
+const currentUser = store.getters._getCurrentUser?.username
 const user = store.getters._getCurrentUser
 
 const newAdvert = ref({
@@ -131,7 +130,6 @@ const saveAdvert = async ()=>{
 
   store.commit("setNewAddId",value)
   store.commit("currentAdvert",value)
-  // router.push("/admin/addimages")
   router.push({name: "AddImages"})
 
 }

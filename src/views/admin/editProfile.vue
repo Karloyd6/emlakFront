@@ -205,7 +205,7 @@ import appAxios from "@/utils/appAxios.js"
 import axios from "axios"
 import router from "@/router"
 
-const user = store.getters._getCurrentUser;
+const user = store.getters._getCurrentUser
 const showError = ref(false);
 const errorMessage = ref("");
 const alertStatus = ref("");
@@ -252,10 +252,6 @@ const passInfo = ref({
 const showProfileImage = `${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/${userInfo.value.profile_image}` || "http://placehol.co/100x100"
 
 
-let config = {
-    headers: {
-      'Authorization': 'Bearer ' + user?.access_token
-    }}
 
 
 const changePassword = ()=>{
@@ -300,15 +296,17 @@ const saveProfileImage =  ()=>{
   const data =profileImage.value;
   formdata.set("profile_image",data[0])
 
+  // console.log(user.access_token)
 
   appAxios.post(`/user/userimage/${_id}`,formdata,{
   Headers : {
     "Content-Type" : "multipart/form-data",
-    'Authorization': 'Bearer ' + user?.access_token
+    'Authorization': 'Bearer ' + user.access_token
   }
   }).then((upload_response)=>{
     userInfo.value.profile_image = upload_response.data
     showAlert.value=true;
+    alertStatus.value = "alert-success"
     alertMessage.value = "resim başarılı bir şekilde güncellendi"
 
     setTimeout(() => {

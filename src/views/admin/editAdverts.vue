@@ -91,11 +91,10 @@ import store from "@/store"
 import router from "@/router"
 import cities from "@/assets/cities/cities.json"
 
-const currentAdvert = store.getters._getCurrentAdvert;
+const currentAdvert = store.getters._getCurrentAdvert
 const cityList = cities;
 
 const currentAddId = currentAdvert._id
-console.log(currentAddId)
 const errorMessage = ref("")
 const errorClass= ref("alert-warning");
 const showError = ref(false);
@@ -133,7 +132,7 @@ const updateAdvert = async ()=>{
     mode: "cors",
     headers : {
       "Content-Type": "application/json",
-      'Authorization': 'Bearer ' + user?.access_token
+      'Authorization': 'Bearer ' + user.access_token
     },
     body: JSON.stringify(newAdvert.value)
   })

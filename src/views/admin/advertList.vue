@@ -26,7 +26,8 @@ import store from "@/store"
 
 let addList = ref([]);
 let page = ref(1)
-const user = computed(()=>store.getters._getCurrentUser)
+const user = store.getters._getCurrentUser
+
 let config = {
     headers: {
       'Authorization': 'Bearer ' + user?.access_token

@@ -12,8 +12,7 @@ import store from "@/store"
 import eventEmitter from '@/utils/eventEmitter';
 import InfiniteLoading from "v3-infinite-loading";
 import "v3-infinite-loading/lib/style.css";
-
-
+import sidebar from "@/components/sidebar.vue"
 
 const app = createApp(App)
 app.use(router);
@@ -24,5 +23,6 @@ app.component("infiniteLoading",InfiniteLoading)
 app.component("adminHeader",adminHeader)
 app.component("headerItem",headerItem);
 app.component("footerItem",footerItem);
+app.component("sidebar",sidebar);
 app.use(bootstrap)
 app.mount('#app')

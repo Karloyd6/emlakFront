@@ -36,12 +36,11 @@
     </div>
 </template>
 <script setup>
-import { ref } from "vue";
+import { ref, computed, onMounted } from "vue";
 import appAxios from "@/utils/appAxios.js";
-import store from "@/store";
 import router from "@/router"
-// import { useStore } from "vuex";
-// const store = useStore()
+import store from "@/store"
+
 
 const passStatus = ref(false)
 
@@ -54,23 +53,13 @@ const errorMessage = ref("")
 
 const showError = ref(false)
 
-const onLogin = async ()=> {
+const onLogin = ()=> {
     if(loginInfo.value.email && loginInfo.value.password){
-
-<<<<<<< HEAD
-        await appAxios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/login`,loginInfo.value).then((login_response)=>{
+    appAxios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/login`,loginInfo.value).then((login_response)=>{
         if(login_response.data){
-            console.log(login_response.data)
-            const user = login_response?.data || {}
-            store.dispatch('currentUser',user)
-        
-=======
-        await appAxios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/login`,loginInfo.value)
-        .then((login_response)=>{
-        if(login_response.data !== null){
 
-            store.commit("currentUser",login_response.data)
->>>>>>> parent of afccb34 (header sidebar vs yapıldı loginde vuex hatası)
+            store.dispatch('currentUser',login_response.data)
+
             setTimeout(() => {
                 router.push({name : "AdvertList"})
             }, 1000);

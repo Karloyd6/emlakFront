@@ -68,13 +68,11 @@
 <script setup>
 import { ref,computed, watch } from "vue";
 import appAxios from "@/utils/appAxios.js";
-// import store from "@/store"
-import { useStore } from "vuex";
-const store = useStore()
+import store from "@/store"
 
-const user = computed(()=>store.getters._getCurrentUser)
+const user = store.getters._getCurrentUser
 const images = ref({})
-let currentAdvert = computed(()=>store.getters._getCurrentAdvert)
+let currentAdvert = store.getters._getCurrentAdvert
 const _id = currentAdvert._id
 
 const addImages= currentAdvert.advert_images || []

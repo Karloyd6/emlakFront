@@ -109,7 +109,7 @@ import router from "@/router";
 import { computed, ref } from "vue";
 import appAxios from "@/utils/appAxios.js";
 
-const currentAdvert = computed(()=>store.getters._getCurrentAdvert);
+const currentAdvert = store.getters._getCurrentAdvert
 const addImages = currentAdvert.advert_images;
 const images = ref([]);
 
