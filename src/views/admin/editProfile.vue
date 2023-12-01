@@ -264,8 +264,7 @@ const changePassword = ()=>{
         }, 2000);
     }else{
 
-        axios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/update/chgpass/${user._id}`,{password : passInfo.value.newPass}).then((password_res) => {
-            // console.log(password_res)
+        appAxios.post(`/user/update/chgpass/${user._id}`,{password : passInfo.value.newPass}).then((password_res) => {
             errorMessage.value = password_res.data;
             alertStatus.value = "alert-success";
             showError.value=true;
@@ -273,7 +272,6 @@ const changePassword = ()=>{
                 showError.value = false
             }, 2000);
         }).catch((err) => {
-            // console.log(err)
             errorMessage.value = err;
             alertStatus.value = "alert-danger";
             showError.value=true;
@@ -296,7 +294,6 @@ const saveProfileImage =  ()=>{
   const data =profileImage.value;
   formdata.set("profile_image",data[0])
 
-  // console.log(user.access_token)
 
   appAxios.post(`/user/userimage/${_id}`,formdata,{
   Headers : {
@@ -313,7 +310,7 @@ const saveProfileImage =  ()=>{
     router.go(0)
   }, 2000);
   }).catch((err) => {
-    showError.value = true;
+    showAlert.value = true;
     alertMessage.value = err
 
     setTimeout(() => {
@@ -335,11 +332,11 @@ const saveUserForm = async ()=> {
     phoneNumber : phoneNumbers.value
   }
 
-  const response = await axios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/update/${userInfo.value._id}`,
+  const response = await appAxios.post(`/user/update/${userInfo.value._id}`,
   savedUser,{
     Headers : {
       "Content-Type" : "application/json",
-      "Authorization" : "bearer " + user.access_token
+      // "Authorization" : "bearer " + user.access_token
     }
   })
 

@@ -23,24 +23,22 @@ import advertTheme from "@/views/admin/advertTheme/advertTheme.vue";
 import { ref, computed } from "vue";
 import eventEmitter from "@/utils/eventEmitter.js";
 import store from "@/store"
+import { getAdverts } from "../../services/loaders";
 
 let addList = ref([]);
 let page = ref(1)
 const user = store.getters._getCurrentUser
 
-let config = {
-    headers: {
-      'Authorization': 'Bearer ' + user?.access_token
-    }}
+// let config = {
+//     headers: {
+//       'Authorization': 'Bearer ' + user?.access_token
+//     }}
 
 const fetchData = ()=> {
 
-  axios
-  .get(
-    `${import.meta.env.VITE_SERVER_HOST}:${
-      import.meta.env.VITE_SERVER_PORT
-    }/advert`,config,
-  )
+  // console.log(localStorage.getItem("user"))
+
+  getAdverts()
   .then((advert_req) => {
     addList.value = advert_req.data;
   })
@@ -52,11 +50,7 @@ const getList = async ($state) => {
 
   console.log("loading....")
 
-const response = await axios.get(
-    `${import.meta.env.VITE_SERVER_HOST}:${
-      import.meta.env.VITE_SERVER_PORT
-    }/advert`,config
-  )
+const response = await getAdverts()
 
   const data = await response.data
   if (data.length < 10)

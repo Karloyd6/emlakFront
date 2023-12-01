@@ -1,8 +1,7 @@
 import axios from "axios";
-import store from "@/store"
-import { computed } from "vue";
-const user = store.getters._getCurrentUser
-axios.defaults.headers.common['Authorization'] = `Bearer ${user?.access_token}`;
+
+const access_token = localStorage.getItem("user")
+axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
 
 const appAxios = axios.create({
     baseURL : `${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}`,
@@ -10,5 +9,7 @@ const appAxios = axios.create({
         'Access-Control-Allow-Origin' : '*',
     }
 });
+
+
 
 export default appAxios;

@@ -6,7 +6,7 @@
     <div class="row main-bg align-items-center" style="width: 100%;height: 180px; background-size: cover;background-position: 50%;">
         <h1 class="text-dark ms-3">İLANLAR</h1>
         <p class="ms-5">
-            <router-link class="router-link" :to="{name : 'HomePage'}">ANASAYFA</router-link> / <router-link class="router-link"  :to="{name : 'HomePage'}">İLANLAR</router-link>
+            <router-link class="router-link" :to="{name : 'HomePage'}">ANASAYFA</router-link> / <router-link class="router-link"  :to="{name : 'ShowAdvert'}">İLANLAR</router-link>
         </p>
     </div>
     <div class="container">
@@ -16,13 +16,14 @@
                 <searchArea></searchArea>
             </div>
             <!--! SEAarCH AREA END-->
-            <div class="col col-lg-9 col-md-12 col-sm-12">
-                <div class="mt-3">
-            <p>
-                Bulunan kayıt : {{ count }}
+            <div class="col col-lg-9 col-md-12 col-sm-12" >
+                <div class="">
+            <p class="p-1 rounded mt-5 text-primary">
+                <h6>Bulunan kayıt : {{ count }}</h6>
             </p>
+            <div class="delinator-line"><div class="delinator"></div></div>
             </div>
-                <div class="row mt-5 gap-1 justify-content-center">
+                <div class="row mt-5 gap-1 justify-content-center" style="float: left;">
                 <showAdvertTheme v-for="(adds,index) in allAdverts" :key="index" :adds="adds"></showAdvertTheme>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+  <nav class="navbar navbar-expand-lg bg-primary fixed-top">
   <div class="container-fluid ">
 
    <div class="d-flex align-items-center">
@@ -9,11 +9,11 @@
           </button>
    </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon text-light"></span>
     </button>
     
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav ">
+      <ul class="navbar-nav fw-700">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Anasayfa</a>
         </li>
@@ -34,7 +34,7 @@
           </ul>
         </li> -->
         <li class="nav-item">
-          <a class="nav-link" href="#">Hakkımızda</a>
+          <a class="nav-link" aria-disabled="true">Hakkımızda</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " aria-disabled="true">Bize ulaşın</a>

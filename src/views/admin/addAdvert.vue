@@ -43,27 +43,39 @@
         <div class="card bg-info text-light p-3 ml-2 mb-2 ">
           <h5>Adres Bilgileri</h5>
           <hr>
-          <div class="mb-3">
-            <label for="city" class="form-label">Şehir</label>
-            <select  v-model="newAdvert.adress.city" class="form-select" aria-label="Şehir seçiniz">
+          <div class="mb-3 mx-2">
+            <label for="city" class="form-label fw-semibold">Şehir</label>
+            <select  class="form-select" aria-label="Şehir seçiniz" v-model="currentCity" @change="fillCounties"> 
               <option selected>Bir şehir seçiniz</option>
-              <option v-for="city in cityList" :key="city.latitude" :value="city">{{ city.name.toUpperCase() }}</option>
+              <option class="text-dark" v-for="(city,index) in cityList" :key="index.latitude" :value="city">{{ city.name }}</option>
               
             </select>
           </div>
-          <div class="mb-3">
-            <label for="district" class="form-label">İlçe</label>
-            <select  v-model="newAdvert.adress.district" class="form-select" aria-label="Default select example" id="district">
-              
-              <option value="0" v-if="newAdvert.adress.city==null">Şehir seçiniz</option>
-              <option v-else v-for="dist in newAdvert.adress.city.counties" :key="dist" :value="dist">{{ dist.toUpperCase() }}</option>
+          <div class="mb-3 mx-2">
+            <label for="city" class="form-label fw-semibold">İlçe</label>
+            <select  class="form-select" aria-label="İlçe seçiniz" v-model="currentCounty" > 
+              <option selected>Bir ilçe seçiniz</option>
+              <option class="text-dark" v-for="(county,index) in currentCity.counties" :key="index.latitude"  :value="county">{{ county.name }}</option>
               
             </select>
           </div>
-          <div class="mb-3">
-            <label for="hood" class="form-label">Mahalle</label>
-            <input type="text" class="form-control bg-secondary border-dark" v-model="newAdvert.adress.hood" id="hood" placeholder="Mahallesi">
+          <div class="mb-3 mx-2">
+            <label for="city" class="form-label fw-semibold">Semt</label>
+            <select  class="form-select" aria-label="Semt seçiniz" v-model="currentDistrict" > 
+              <option selected>Bir semt seçiniz</option>
+              <option class="text-dark" v-for="(district,index) in currentCounty.districts" :key="index.latitude"  :value="district">{{ district.name }}</option>
+              
+            </select>
           </div>
+          <div class="mb-3 mx-2">
+            <label for="city" class="form-label fw-semibold">Mahalle</label>
+            <select  class="form-select" aria-label="Mahalle seçiniz" v-model="currentNeighborhoods" > 
+              <option selected>Bir mahalle seçiniz</option>
+              <option class="text-dark" v-for="(neighborhoods,index) in currentDistrict.neighborhoods" :key="index.latitude"  :value="neighborhoods">{{ neighborhoods.name }}</option>
+              
+            </select>
+          </div>
+          
           <div class="mb-3">
             <label for="detail" class="form-label">Adres detayı</label>
             <input type="text" class="form-control bg-secondary border-dark" v-model="newAdvert.adress.detail" id="detail" placeholder="Adres detayı">
@@ -84,12 +96,26 @@
   </div>
 </template>
 <script setup>
-import {computed, ref} from "vue"
-import cities from "@/assets/cities/cities.json"
+import { ref } from "vue"
 import store from "@/store";
 import router from "@/router"
+import cities from "@/assets/cities/data.json"
+import { addAdvert } from "@/services/loaders.js"
 
-const cityList = cities
+const cityList = ref([]);
+const currentCity = ref("")
+const currentCounty = ref("")
+const currentDistrict = ref("")
+const currentNeighborhoods = ref("")
+
+const fillCities= ()=>{
+  cities.forEach(city => {
+    cityList.value.push(city)
+  });
+}
+
+fillCities()
+
 const currentUser = store.getters._getCurrentUser?.username
 const user = store.getters._getCurrentUser
 
@@ -99,6 +125,7 @@ const newAdvert = ref({
   price :null,
   adress : {
       city : null,
+      county : null, 
       district : null,
       hood: null,
       detail : null,
@@ -111,23 +138,20 @@ const newAdvert = ref({
 
 const saveAdvert = async ()=>{
   
-  newAdvert.value.adress.city = newAdvert.value.adress.city?.name
+  newAdvert.value.adress.city = currentCity.value.name
+  newAdvert.value.adress.county =currentCounty.value.name
+  newAdvert.value.adress.district = currentDistrict.value.name
+  newAdvert.value.adress.hood = currentNeighborhoods.value.name
 
-  const response = await fetch(`${import.meta.env.VITE_SERVER_HOST}:${
-      import.meta.env.VITE_SERVER_PORT
-    }/advert`,{
-    method : "POST",
-    mode: "cors",
-    headers : {
-      "Content-Type": "application/json",
-      'Authorization': 'Bearer ' + user?.access_token
-    },
-    body: JSON.stringify(newAdvert.value)
-  })
 
+
+  let response = await addAdvert(newAdvert.value)
+
+  console.log("res",response)
+ 
   
-  const value = await response.json()
-
+  let value = response.data
+  console.log(value)
   store.commit("setNewAddId",value)
   store.commit("currentAdvert",value)
   router.push({name: "AddImages"})
@@ -141,6 +165,7 @@ const clearForm = ()=>{
   price :null,
   adress : {
       city : null,
+      county : null,
       district : null,
       hood: null,
       detail : null,

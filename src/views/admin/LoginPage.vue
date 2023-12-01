@@ -55,10 +55,11 @@ const showError = ref(false)
 
 const onLogin = ()=> {
     if(loginInfo.value.email && loginInfo.value.password){
-    appAxios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/user/login`,loginInfo.value).then((login_response)=>{
+    appAxios.post(`/user/login`,loginInfo.value).then((login_response)=>{
         if(login_response.data){
-
+            const access_token = login_response.data.access_token
             store.dispatch('currentUser',login_response.data)
+            localStorage.setItem("user",access_token)
 
             setTimeout(() => {
                 router.push({name : "AdvertList"})

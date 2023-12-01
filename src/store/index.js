@@ -46,6 +46,9 @@ const store = createStore({
     actions : {
         currentUser(context, payload){
            context.commit("currentUser",payload)
+        },
+        logout(context){
+            context.commit("logout")
         }
     },
 

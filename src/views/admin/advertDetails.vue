@@ -134,7 +134,7 @@ const modify = () => {
 };
 
 const deleteAdvert = ()=>{
-    appAxios.delete(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/advert/${currentAdvert._id}`).then((delete_req)=>{
+    appAxios.delete(`/advert/${currentAdvert._id}`).then((delete_req)=>{
 
       router.push({name : "AdvertList"})
 

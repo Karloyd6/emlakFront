@@ -2,7 +2,7 @@ const adminRoutes = [
     {
         name: "AddAdvert",
         path : "/admin/addAdvert",
-        component : ()=> import("@/views/admin/addAdvert.vue")
+        component : ()=> import("@/views/admin/addAdvert.vue"),
     },
     {
         name : "AddImages",

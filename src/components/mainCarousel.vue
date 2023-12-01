@@ -2,7 +2,7 @@
   <div class=" main-bg d-flex justify-content-center align-items-center">
     
     <div class="search-bar ">
-        <input type="text" class="form-control form-control-sm" id="exampleFormControlInput1" placeholder="İlanlarda ara">
+        <input type="text" class="form-control form-control-sm" id="exampleFormControlInput1" placeholder="İlan no ile ara">
 
       <select class="form-select form-select-sm" aria-label="Small select example">
         <option selected>Emlak Tipi</option>

@@ -68,7 +68,7 @@
 <script setup>
 import { ref,computed, watch } from "vue";
 import appAxios from "@/utils/appAxios.js";
-import store from "@/store"
+import store from "@/store";
 
 const user = store.getters._getCurrentUser
 const images = ref({})
@@ -78,11 +78,7 @@ const _id = currentAdvert._id
 const addImages= currentAdvert.advert_images || []
 const imagesOn = ref([]);
 
-let config={
-  header : {
-    'Authorization': 'Bearer ' + user?.access_token
-  }
-}
+
 
 
 //! ALERT AREA ///////
@@ -94,7 +90,7 @@ const alertStatus = ref("alert-warning")
 //! ALERT AREA ///////
 
 const fetchData = ()=>{
-  appAxios.get(`/advert/${_id}`,config).then((advert_response) => {
+  appAxios.get(`/advert/${_id}`).then((advert_response) => {
     const data = advert_response.data[0]
     
    data.advert_images.forEach(image => {
@@ -114,7 +110,7 @@ const removeImage=(img)=>{
 
   const deleteInfo = `/advert/delete_image/${_id}&${img.name}`
 
-  appAxios.delete(deleteInfo,config)
+  appAxios.delete(deleteInfo)
   .then((delete_response)=>{
 
     showAlert.value= true;
@@ -154,7 +150,7 @@ const saveImages = async ()=>{
   await appAxios.post(`/advert/image_uploads/${_id}`,formdata,{
   Headers : {
     "Content-Type" : "multipart/form-data",
-    'Authorization': 'Bearer ' + user?.access_token
+    'Authorization': 'Bearer ' + user.access_token
   }
   })
   .then((upload_res)=>{

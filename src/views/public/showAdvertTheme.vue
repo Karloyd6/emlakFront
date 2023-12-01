@@ -28,6 +28,7 @@
 </template>
 <script setup>
 import { computed } from 'vue';
+import router from "@/router"
 
     // import { defineProps } from 'vue';
 
@@ -41,6 +42,7 @@ import { computed } from 'vue';
 
         // return `${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/${advert.advert_images[0].url}`
     })
+    
 
     
 

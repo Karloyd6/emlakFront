@@ -6,7 +6,7 @@
       <h5 class="card-title">{{ advert.title }}</h5>
       
       <small class="card-text">
-        {{ advert.adress.hood }} / {{ advert.adress.district }}
+        {{ advert.adress.hood }} / {{ advert.adress.district }} /{{ advert.adress.city }}
       </small>
       <hr />
       <h5 class="text-bold">{{ advert.price }}</h5>
