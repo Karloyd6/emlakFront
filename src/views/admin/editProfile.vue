@@ -5,7 +5,7 @@
     style="height: 100vh"
   >
    
-    <div class="row login-card" style="width: 40rem">
+    <div class="row login-card" style="width: 35rem">
       <h3 class="mb-3 bg-dark rounded">Kullanıcı bilgi güncelleme</h3>
       <div class="input-group mb-3">
         <span
@@ -202,10 +202,9 @@
 import { computed, ref } from "vue";
 import store from "@/store";
 import appAxios from "@/utils/appAxios.js"
-import axios from "axios"
 import router from "@/router"
 
-const user = store.getters._getCurrentUser
+const user = store.state.auth.user
 const showError = ref(false);
 const errorMessage = ref("");
 const alertStatus = ref("");
@@ -232,6 +231,7 @@ const phoneNumbersCount = computed(()=>{
 
 const addNumber = ()=> {
   phoneNumbers.value.push(newNumber.value)
+  newNumber.value = null
 }
 
 const deleteNumber = (deleted)=>{
@@ -298,7 +298,6 @@ const saveProfileImage =  ()=>{
   appAxios.post(`/user/userimage/${_id}`,formdata,{
   Headers : {
     "Content-Type" : "multipart/form-data",
-    'Authorization': 'Bearer ' + user.access_token
   }
   }).then((upload_response)=>{
     userInfo.value.profile_image = upload_response.data
@@ -336,7 +335,6 @@ const saveUserForm = async ()=> {
   savedUser,{
     Headers : {
       "Content-Type" : "application/json",
-      // "Authorization" : "bearer " + user.access_token
     }
   })
 
@@ -363,6 +361,6 @@ const saveUserForm = async ()=> {
     ...savedUser
   }
 
-  store.commit("currentUser",commit)
+  store.commit("auth/loginSuccess",commit)
 }
 </script>

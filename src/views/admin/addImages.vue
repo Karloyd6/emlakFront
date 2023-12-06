@@ -150,7 +150,6 @@ const saveImages = async ()=>{
   await appAxios.post(`/advert/image_uploads/${_id}`,formdata,{
   Headers : {
     "Content-Type" : "multipart/form-data",
-    'Authorization': 'Bearer ' + user.access_token
   }
   })
   .then((upload_res)=>{

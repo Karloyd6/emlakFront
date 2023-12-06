@@ -1,5 +1,5 @@
 <template>
-    <div class="card mb-3 mt-2 p-1 ms-3 show-card" style="width: 350px; height: 350px;">
+    <div class="card mb-3 mt-2 p-1 ms-3 show-card" style="width: 350px; height: 350px;" @click="showCurrentAdvert">
         
         <div class="card-img" :style="image" >
         </div>
@@ -28,13 +28,11 @@
 </template>
 <script setup>
 import { computed } from 'vue';
+import store from "@/store"
 import router from "@/router"
-
-    // import { defineProps } from 'vue';
 
     const props = defineProps({ adds : Object})
     const advert = props.adds
-    // console.log(advert)
 
     const image = computed(()=>{
 
@@ -43,7 +41,10 @@ import router from "@/router"
         // return `${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/${advert.advert_images[0].url}`
     })
     
-
+const showCurrentAdvert = ()=>{
+    store.dispatch("advert/setCurrentAdvert",advert)
+    router.push({name : "ShowAdvertDetail"})
+}
     
 
 </script>

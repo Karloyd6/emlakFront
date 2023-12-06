@@ -15,6 +15,11 @@ const routes=[
       name : "ShowAdvert",
       path : "/showAdvert",
       component : ()=> import("@/views/showAdvert.vue")
+    },
+    {
+      name : "ShowAdvertDetail",
+      path : "/advertDetails",
+      component : ()=> import("@/views/public/showAdvertDetail.vue")
     }
 ]
 
@@ -29,7 +34,7 @@ const router = createRouter({
 router.beforeEach((to, _, next) => {
     const authRequiredRoutes = ["AddImages","AdvertList","AdvertDetails","EditAdvert","EditProfile"];
     const authNotRequiredRoutes = ["LoginPage"];
-    const _isAuthenticated = store.getters._isAuthenticate
+    const _isAuthenticated = JSON.parse(localStorage.getItem("user"))
   
     if (authNotRequiredRoutes.indexOf(to.name) > -1 && _isAuthenticated) next(false);
   

@@ -1,23 +1,29 @@
 import { createStore } from "vuex"
-import VuexPersister from 'vuex-persister'
+import VuexPersister from 'vuex-persister';
+import { auth } from "@/store/auth.js"
+import { advert } from "@/store/adverts.js"
+
+import SecureLS from "secure-ls";
+var ls = new SecureLS({isCompression: false});
+// ls.set("key", {data : "secret_key"})
 
 const vuexPersister = new VuexPersister({
     // ...your options
+    key : "key",
+    storage: {
+        getItem: key => ls.get(key),
+        setItem: (key, value) => ls.set(key, value),
+        removeItem: key => ls.remove(key),
+    }
 })
 
 const store = createStore({
     state : {
-        advert : {},
+        // advert : {},
         newAddId : "",
         user : null,
     },
     mutations : {
-        currentUser(state,user){
-            state.user = user
-        },
-        logout(state){
-            state.user = null
-        },
         currentAdvert(state,advert){
             state.advert = advert
         },
@@ -31,28 +37,16 @@ const store = createStore({
         },
         _getNewAddId(state){
             return state.newAddId
-        },
-        _getCurrentUser(state){
-            return state.user
-        },
-        _isAuthenticate(state){
-            if(state.user){
-                return true
-            }
-            return false
-            // return state.user !== null ? true : false
         }
     },
     actions : {
-        currentUser(context, payload){
-           context.commit("currentUser",payload)
-        },
-        logout(context){
-            context.commit("logout")
-        }
     },
 
-    plugins : [vuexPersister.persist]
+    plugins : [vuexPersister.persist],
+    modules: {
+        auth,
+        advert
+    }
 })
 
 export default store;

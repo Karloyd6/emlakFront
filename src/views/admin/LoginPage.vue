@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex align-items-center justify-content-center bg-dark card-bg" style="height: 100vh;width: 100%;">
         <div class="container d-flex align-items-center justify-content-center ">
-            <div class="login-card">
+            <div class="login-card" style="width: 28rem;">
             
             <div class="delinator">
                 <div class="delinator-line"></div><h3 class="text-light">LOGIN</h3><div class="delinator-line"></div>
@@ -36,10 +36,11 @@
     </div>
 </template>
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref } from "vue";
 import appAxios from "@/utils/appAxios.js";
 import router from "@/router"
 import store from "@/store"
+// import authServices from "@/services/authServices.js"
 
 
 const passStatus = ref(false)
@@ -54,31 +55,40 @@ const errorMessage = ref("")
 const showError = ref(false)
 
 const onLogin = ()=> {
-    if(loginInfo.value.email && loginInfo.value.password){
-    appAxios.post(`/user/login`,loginInfo.value).then((login_response)=>{
-        if(login_response.data){
-            const access_token = login_response.data.access_token
-            store.dispatch('currentUser',login_response.data)
-            localStorage.setItem("user",access_token)
 
-            setTimeout(() => {
-                router.push({name : "AdvertList"})
-            }, 1000);
+
+    if(loginInfo.value.email && loginInfo.value.password){
+
+        store.dispatch("auth/login",loginInfo.value).then((result) => {
+            router.push({name : "AdvertList"})
+        }).catch((err) => {
+            console.log(err)
+        });
+    // appAxios.post(`/user/login`,loginInfo.value).then((login_response)=>{
+    //     if(login_response.data){
+    //         console.log(login_response.data)
+    //         const access_token = login_response.data.access_token
+    //         store.dispatch('currentUser',login_response.data)
+    //         localStorage.setItem("user",JSON.stringify(access_token))
+
+    //         setTimeout(() => {
+    //             router.push({name : "AdvertList"})
+    //         }, 1000);
             
 
-        }else{
-            console.log(login_response)
-        }
+    //     }else{
+    //         console.log(login_response)
+    //     }
         
-    })
-    .catch((err) => {
-        errorMessage.value= err.response.data
-        showError.value = true
+    // })
+    // .catch((err) => {
+    //     errorMessage.value= err.response.data
+    //     showError.value = true
 
-        setTimeout(() => {
-            showError.value= false
-        }, 3000);
-    })
+    //     setTimeout(() => {
+    //         showError.value= false
+    //     }, 3000);
+    // })
     }else{
         errorMessage.value = {"hata" : "Lütfen bütün alanları doldurunuz"}
         showError.value= true;

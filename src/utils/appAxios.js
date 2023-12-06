@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const access_token = localStorage.getItem("user")
-axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+const access_token = JSON.parse(localStorage.getItem("user"))
+if(access_token){
+    axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+}
 
 const appAxios = axios.create({
     baseURL : `${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}`,

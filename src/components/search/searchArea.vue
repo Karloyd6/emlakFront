@@ -33,7 +33,7 @@
         <div class="delinator-line my-3 "><div class="delinator"></div></div>
         <!--* İl İLÇE arama -->
         <div class="mt-3">
-          <h5 class="ms-3">Şehir/İlçe/Mahalle</h5>
+          <h6 class="ms-3">Şehir/İlçe/Mahalle</h6>
           <div class="mb-3 mx-2">
             <label for="city" class="form-label fw-semibold">Şehir</label>
             <select  class="form-select" aria-label="Şehir seçiniz" v-model="currentCity" @change="fillCounties"> 
@@ -55,7 +55,6 @@
             <select  class="form-select" aria-label="Semt seçiniz" v-model="currentDistrict" > 
               <option selected>Bir semt seçiniz</option>
               <option class="text-dark" v-for="(district,index) in currentCounty.districts" :key="index.latitude"  :value="district">{{ district.name }}</option>
-              
             </select>
           </div>
           <div class="mb-3 mx-2">
@@ -63,10 +62,8 @@
             <select  class="form-select" aria-label="Mahalle seçiniz" v-model="currentNeighborhoods" > 
               <option selected>Bir mahalle seçiniz</option>
               <option class="text-dark" v-for="(neighborhoods,index) in currentDistrict.neighborhoods" :key="index.latitude"  :value="neighborhoods">{{ neighborhoods.name }}</option>
-              
             </select>
           </div>
-          
         </div>
 
         <div class="delinator-line"><div class="delinator"></div></div>
@@ -93,7 +90,9 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref } from "vue";
+import store from "@/store";
+import router from "@/router"
 import cities from "@/assets/cities/data.json"
 const cityList = ref([]);
 const currentCity = ref("")
@@ -101,6 +100,7 @@ const currentCounty = ref("")
 const currentDistrict = ref("")
 const currentNeighborhoods = ref("")
 const advertId = ref("")
+
 
 const fillCities= ()=>{
   cities.forEach(city => {
@@ -111,6 +111,37 @@ const fillCities= ()=>{
 fillCities()
 const goToSalePage = (whatFor)=>{
   console.log(whatFor)
+  if(whatFor=="allHome"){
+    store.dispatch("advert/setAdvertList","konut")
+    store.commit("advert/setRentOrBuy",null)
+    router.go(0)
+  }else if(whatFor == "allStore" ){
+    store.dispatch("advert/setAdvertList","isyeri")
+    store.commit("advert/setRentOrBuy",null)
+    router.go(0)
+  }else if(whatFor == "saleLand"){
+    store.dispatch("advert/setAdvertList","arsa")
+    store.commit("advert/setRentOrBuy",null)
+    router.go(0)
+  }else if(whatFor == "saleHome"){
+    store.dispatch("advert/setAdvertList","konut");
+    store.commit("advert/setRentOrBuy","sale")
+    router.go(0)
+  }else if(whatFor == "rentHome"){
+    store.dispatch("advert/setAdvertList","konut");
+    store.commit("advert/setRentOrBuy","rent")
+    router.go(0)
+  }else if(whatFor == "saleStore"){
+    store.dispatch("advert/setAdvertList","isyeri");
+    store.commit("advert/setRentOrBuy","sale")
+    router.go(0)
+  }else if(whatFor == "rentStore"){
+    store.dispatch("advert/setAdvertList","isyeri");
+    store.commit("advert/setRentOrBuy","rent")
+    router.go(0)
+  }
+
+
 }
 
 </script>

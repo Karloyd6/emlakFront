@@ -84,6 +84,70 @@
 
       </div>
     </div>
+    <div class="row mb-3 d-flex justify-content-center">
+      <div class="row">
+        <div class="card bg-primary m-0 mb-2  align-items-center">
+          <h5 class="text-light">İlan bilgileri</h5>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 px-2 text-light " >
+
+          <div class="mb-3">
+            <label for="room" class="form-label">Oda sayısı</label>
+            <input type="text" class="form-control" v-model="newAdvert.info.room" id="room" placeholder="3+1 2+3 vs...">
+          </div>
+
+          <div class="mb-3">
+            <label for="m2" class="form-label">Metrekare</label>
+            <input type="text" class="form-control" v-model="newAdvert.info.m2" id="m2" placeholder="120 m2">
+          </div>
+
+          <div class="mb-3">
+            <label for="bath" class="form-label">Banyo sayısı</label>
+            <input type="text" class="form-control" v-model="newAdvert.info.bath" id="bath" placeholder="1, 2 ....">
+          </div>
+
+          <div class="mb-3">
+            <label for="kat" class="form-label">Kat</label>
+            <input type="text" class="form-control" v-model="newAdvert.info.floor" id="kat" placeholder="kaçıncı kat">
+          </div>
+
+          <div class="mb-3">
+            <label for="katsayısı" class="form-label">Kat sayısı</label>
+            <input type="text" class="form-control" v-model="newAdvert.info.allFloor" id="katsayısı" placeholder="toplam kat">
+          </div>
+
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12">
+
+          <div class="mb-3">
+            <label for="buildage" class="form-label">Bina yaşı</label>
+            <input type="text" class="form-control " v-model="newAdvert.info.buildAge" id="buildage" placeholder="bina yaşı">
+          </div>
+
+          <div class="mb-3">
+            <label for="heating" class="form-label" >Isıtma</label>
+            <input type="text" class="form-control" v-model="newAdvert.info.heating" id="heating" placeholder="soba, kalorifer, tezek ....">
+          </div>
+
+          <div class="mb-3">
+            <label for="cephe" class="form-label">Cephe</label>
+            <input type="text" class="form-control" v-model="newAdvert.info.front" id="cephe" placeholder="Kuzey, doğu .....">
+          </div>
+
+          <div class="mb-3">
+            <label for="takas" class="form-label">Takas</label>
+            <input type="text" class="form-control" v-model="newAdvert.info.exchange" id="takas" placeholder="Evet, Hayır">
+          </div>
+
+          <div class="mb-3">
+            <label for="kredi" class="form-label">Kredi</label>
+            <input type="text" class="form-control" v-model="newAdvert.info.credit" id="kredi" placeholder="Evet, Hayır">
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="delinator-line my-2"><div class="delinator"></div></div>
     
     <div class="row mb-5 pb-3">
       <div class="col d-grid">
@@ -116,8 +180,8 @@ const fillCities= ()=>{
 
 fillCities()
 
-const currentUser = store.getters._getCurrentUser?.username
-const user = store.getters._getCurrentUser
+const currentUser = store.state.auth.user.username
+const user = store.state.auth.user.username
 
 const newAdvert = ref({
   title : null,
@@ -130,6 +194,18 @@ const newAdvert = ref({
       hood: null,
       detail : null,
   },
+  info : {
+        room: null,
+        m2: null,
+        bath: null,
+        floor: null,
+        allFloor: null,
+        buildAge: null,
+        heating: null,
+        front: null,
+        exchange: null,
+        credit: null
+    },
   advert_images: [],
   user : currentUser,
   type : null,

@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-secondary text-dark">
+  <nav class="navbar navbar-expand-lg bg-secondary text-dark" style="z-index: 1;">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Navbar</a>
       <button
@@ -62,20 +62,21 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
 import router from "@/router";
 import store from "@/store";
 import { RouterLink } from "vue-router";
 
-const isAuthenticate = store.getters._isAuthenticate
+const loggedIn = localStorage.getItem("user") ? true : false
+
+const isAuthenticate = loggedIn
 const toLogin = () => {
   router.push({ name: "LoginPage" });
 };
 
 const toLogout = () => {
-  store.commit("logout");
+  store.dispatch("auth/logout")
   router.push({ name: "LoginPage" });
 };
 
-const currentUser = store.getters._getCurrentUser?.name
+const currentUser = store.state.auth.user.name
 </script>

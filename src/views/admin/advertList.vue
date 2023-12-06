@@ -18,9 +18,8 @@
 </template>
 <script setup>
 
-import axios from "axios";
 import advertTheme from "@/views/admin/advertTheme/advertTheme.vue";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import eventEmitter from "@/utils/eventEmitter.js";
 import store from "@/store"
 import { getAdverts } from "../../services/loaders";
@@ -29,14 +28,10 @@ let addList = ref([]);
 let page = ref(1)
 const user = store.getters._getCurrentUser
 
-// let config = {
-//     headers: {
-//       'Authorization': 'Bearer ' + user?.access_token
-//     }}
+
 
 const fetchData = ()=> {
 
-  // console.log(localStorage.getItem("user"))
 
   getAdverts()
   .then((advert_req) => {
@@ -48,7 +43,7 @@ const fetchData = ()=> {
 
 const getList = async ($state) => {
 
-  console.log("loading....")
+  // console.log("loading....")
 
 const response = await getAdverts()
 
