@@ -106,13 +106,18 @@ tb<template>
 
         <!--* ADVERT DETAİLS -->
 
-        <div class="bg-light d-flex justify-content-center align-items-end my-1 pb-2" style="width: 100%; height: 98px;">
-            <i class="flaticon-my-house me-2"></i><h5 class="text-center">İlan Detayları</h5>
+        <div class="row bg-light d-flex justify-content-center align-items-center my-1 pb-2" style="width: 100%; height: 98px;">
+            <div class="col-3" @click="showArea('details')">
+                <div class="btn d-flex align-items-center" :class="showDetail ? 'active' : ''"><i class="flaticon-my-house me-2"></i><h5 class="text-center">İlan Detayları</h5></div>
+            </div>
+            <div class="col-3 " @click="showArea('map')">
+                <div class="btn d-flex align-items-center" :class="showMap ? 'active' : ''"><i class="flaticon-my-house me-2"></i><h5 class="text-center">Harita</h5></div>
+            </div>
         </div>
 
-        <div class="row px-5 mb-4" style="width: 100%;">
+        <div class="row px-5 mb-4" style="width: 100%;" v-if="showDetail">
             <!--* DETAİL LİST -->
-            <div class="col-lg-4 mt-5 p-4 rounded  bg-light">
+            <div class="col-lg-4 mt-5 p-4 rounded  bg-light" >
                 <table class="table table-striped table-light bg-light p-3">
                     <tbody>
                         <tr class="p-3">
@@ -168,6 +173,8 @@ tb<template>
             </div>
             <!--* DETAİL LİST -->
 
+            
+
             <!--! DESCRİPTİON -->
             <div class="col-lg-8">
                 <div class="card mt-5 p-0">
@@ -182,14 +189,22 @@ tb<template>
             <!--! DESCRİPTİON -->
         </div>
 
+        <!--? GOOGLE MAPS-->
+        <div class="row px-5 mb-4" style="width: 100%;" v-if="showMap"></div>
+            <googleMaps></googleMaps>
+        </div>
+            <!--? GOOGLE MAPS-->
         <!--* ADVERT DETAİLS -->
-    </div>
     
 </template>
 <script setup>
     import { ref, computed } from "vue";
     import appAxios from "@/utils/appAxios.js"
     import store from "@/store";
+    import googleMaps from "@/components/details/googleMaps.vue"
+
+    const showDetail = ref(true);
+    const showMap = ref(false)
 
     const currentAdvert = store.getters["advert/getCurrentAdvert"]
     const imageList = ref([]);
@@ -238,4 +253,14 @@ tb<template>
     }
    
     getAuthorInfo()
+
+    const showArea = (which)=>{
+        if(which=="details"){
+            showDetail.value=true;
+            showMap.value=false;
+        }else if(which=="map"){
+            showDetail.value=false;
+            showMap.value=true;
+        }
+    }
 </script>

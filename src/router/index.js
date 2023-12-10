@@ -20,6 +20,11 @@ const routes=[
       name : "ShowAdvertDetail",
       path : "/advertDetails",
       component : ()=> import("@/views/public/showAdvertDetail.vue")
+    },
+    {
+      name : "Harita",
+      path : "/harita",
+      component : ()=> import("@/components/details/googleMaps.vue")
     }
 ]
 

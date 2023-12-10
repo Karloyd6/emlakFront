@@ -493,6 +493,7 @@ body{
     transform:scale(1.1,1.1);
     box-shadow: 0px 0px 5px #3d3d3d;
     color: #99ffff !important;
+    transition: all .5s ease-in-out;
 }
 .flaticon-my-house::before{
     content: "";
