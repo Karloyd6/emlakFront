@@ -111,7 +111,8 @@
                     >
                       <Marker :options="markerOptions" />
                     </GoogleMap>
-                    <span class="card">Koordinatlar : {{ center.lat }} / {{ center.lng }}</span>
+                    <span class="card">Koordinatlar : {{ latitude }} / {{ longitude }}</span>
+                    <span>{{  markerOptions }}</span>
                     <!--? MAP -->
                   </div>
                   <div class="modal-footer">
@@ -204,53 +205,31 @@
   </div>
 </template>
 <script setup>
-import { ref, watch } from "vue"
+import { computed, reactive, ref } from "vue"
 import store from "@/store";
 import router from "@/router"
 import cities from "@/assets/cities/data.json"
 import { addAdvert } from "@/services/loaders.js"
-import { GoogleMap, Marker, InfoWindow } from "vue3-google-map";
+import { GoogleMap, Marker } from "vue3-google-map";
 
-    const latitude=ref(39.589247)
+    const latitude= ref(39.589247)
     const longitude =ref(32.124502)
-    const center = ref({ lat: latitude.value, lng: longitude.value });
+    const center = reactive({ lat: latitude.value, lng: longitude.value });
     const mapRef = ref(null)
-
-    const markerOptions = ref({ position: center.value })
-
-    watch(latitude, (oldValue,newValue)=>{
-      center.value.lat=newValue
-      markerOptions.value.position= { lat : newValue ,lng : longitude.value}
-      console.log("old",oldValue)
-      console.log("new",newValue)
+    // const markerOptions = reactive({ position: {lat : latitude.value, lng: longitude.value} })
+    const markerOptions = computed(()=>{
+      return { position : { lat : latitude.value, lng : longitude.value }}
     })
-    
+
     const getCoords = (e)=>{
-
       const gmap = mapRef.value.map;
-
       const center2 = gmap.getCenter();
-      // console.log(center2())
-      // console.log('Map: Center: (', center2.lat(), ',', center2.lng(), ')');
-
         console.log(center2.lat(),center2.lng())
-        latitude.value=center2.lat()
-        longitude.value=center2.lng()
+        latitude.value = center2.lat()
+        longitude.value = center2.lng()
         newAdvert.value.location.lat=center2.lat()
         newAdvert.value.location.lng=center2.lng()
     }
-
-    // const centerChanged = ()=>{
-      
-    //   const gmap = mapRef.value.map;
-
-    //   const center2 = gmap.getCenter();
-    //   // console.log(center2)
-    //   // console.log('Map: Center: (', center2.lat(), ',', center2.lng(), ')');
-    //   // latitude.value=center2.lat()
-    //   // longitude.value=center2.lng()
-    // }
-
 
 const cityList = ref([]);
 const currentCity = ref("")

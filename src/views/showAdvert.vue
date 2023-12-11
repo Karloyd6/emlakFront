@@ -9,7 +9,7 @@
             <router-link class="router-link" :to="{name : 'HomePage'}">ANASAYFA</router-link> / <router-link class="router-link"  :to="{name : 'ShowAdvert'}">İLANLAR</router-link>
         </p>
     </div>
-    <div class="container">
+    <div class="mx-5">
         <div class="row">
             <!--! SEARCH AREA -->
             <div class="col col-lg-3 col-md-12 col-sm-12 mt-5">

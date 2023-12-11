@@ -108,10 +108,20 @@ tb<template>
 
         <div class="row bg-light d-flex justify-content-center align-items-center my-1 pb-2" style="width: 100%; height: 98px;">
             <div class="col-3" @click="showArea('details')">
-                <div class="btn d-flex align-items-center" :class="showDetail ? 'active' : ''"><i class="flaticon-my-house me-2"></i><h5 class="text-center">İlan Detayları</h5></div>
+                <div class="btn d-flex align-items-center" :class="showDetail ? 'active' : ''">
+                    <i class="fa-solid fa-circle-info fa-xl me-2"></i>
+                    <h5 class="text-center align-items-center">
+                        İlan Detayları
+                    </h5>
+                </div>
             </div>
             <div class="col-3 " @click="showArea('map')">
-                <div class="btn d-flex align-items-center" :class="showMap ? 'active' : ''"><i class="flaticon-my-house me-2"></i><h5 class="text-center">Harita</h5></div>
+                <div class="btn d-flex align-items-center" :class="showMap ? 'active' : ''">
+                    <i class="fa-solid fa-map-location me-2 fa-xl"></i>
+                    <h5 class="text-center">
+                        Harita
+                    </h5>
+                </div>
             </div>
         </div>
 
@@ -190,10 +200,13 @@ tb<template>
         </div>
 
         <!--? GOOGLE MAPS-->
-        <div class="row px-5 mb-4" style="width: 100%;" v-if="showMap"></div>
-            <googleMaps></googleMaps>
+        <div class="" v-if="showMap">
+            <div class="row px-5 mb-4" style="width: 100%;" ></div>
+                <googleMaps></googleMaps>
+            </div>
         </div>
-            <!--? GOOGLE MAPS-->
+           
+        <!--? GOOGLE MAPS-->
         <!--* ADVERT DETAİLS -->
     
 </template>
