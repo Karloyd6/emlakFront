@@ -2,7 +2,7 @@
   <header class="">
     <headerItem></headerItem>
   </header>
-  <main class="mt-5 p-0">
+  <main class=" p-0">
     <div class="row main-bg align-items-center" style="width: 100%;height: 180px; background-size: cover;background-position: 50%;">
         <h1 class="text-dark ms-3">İLANLAR</h1>
         <p class="ms-5">
@@ -12,19 +12,19 @@
     <div class="mx-5">
         <div class="row">
             <!--! SEARCH AREA -->
-            <div class="col col-lg-3 col-md-12 col-sm-12 mt-5">
+            <div class="col col-lg-3 col-md-12 col-sm-12 mt-3">
                 <searchArea></searchArea>
             </div>
             <!--! SEAarCH AREA END-->
             <div class="col col-lg-9 col-md-12 col-sm-12" >
                 <div class="">
-            <p class="p-1 rounded mt-5 text-primary d-flex justify-content-between" >
+            <p class="p-1 rounded mt-3 text-primary d-flex justify-content-between" >
                 <h6>Bulunan kayıt : {{ count }}</h6>
                 <button class="btn btn-primary " @click="getAllAdverts">Tüm ilanlar</button>
             </p>
             <div class="delinator-line"><div class="delinator"></div></div>
             </div>
-              <div class="row mt-5 gap-1  advert-container" style="float: left; width: 100%;" v-if="isNull">
+              <div class="row mt-2 gap-1 float-center  advert-container" style="float: left; width: 100%;" v-if="isNull">
                 <showAdvertTheme v-for="(adds,index) in allAdverts" :key="index" :adds="adds" ></showAdvertTheme>
               </div>
               <div class="alert alert-warning mt-5" v-else style="width: 100%;">
@@ -66,7 +66,7 @@ const count = computed(()=>{
 
 const getAllAdverts = ()=>{
   store.dispatch("advert/setAdvertList")
-  store.commit("advert/setRentOrBuy",null)
+  store.dispatch("advert/setRentOrBuy",null)
   allAdverts.value = store.getters["advert/getAdvertList"]
   router.go(0)
 }

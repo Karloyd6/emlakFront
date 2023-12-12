@@ -27,11 +27,19 @@
             </select>
         </div>
         <div class="mb-3">
-          <label for="rentOrBut" class="form-label">İlan durumu</label>
-          <select id="rentOrBut"  v-model="newAdvert.rentOrBuy" class="form-select form-select-sm" aria-label="Şehir seçiniz">
+          <label for="rentOrBuy" class="form-label">İlan durumu</label>
+          <select id="rentOrBuy"  v-model="newAdvert.rentOrBuy" class="form-select form-select-sm" aria-label="Şehir seçiniz">
               <option selected>İlan durumu</option>
               <option value="sale">Satılık</option>
               <option value="rent">Kiralık</option>
+            </select>
+        </div>
+        <div class="mb-3">
+          <label for="showcase" class="form-label">Vitrin ilanı</label>
+          <select id="showcase"  v-model="newAdvert.showcase" class="form-select form-select-sm" aria-label="Şehir seçiniz">
+              <option selected>Vitrine ekle</option>
+              <option value="true">evet</option>
+              <option value="false">hayır</option>
             </select>
         </div>
   
@@ -112,12 +120,12 @@
                       <Marker :options="markerOptions" />
                     </GoogleMap>
                     <span class="card">Koordinatlar : {{ latitude }} / {{ longitude }}</span>
-                    <span>{{  markerOptions }}</span>
+
                     <!--? MAP -->
                   </div>
                   <div class="modal-footer">
-                    <button class="btn btn-sm btn-success" @click="saveImages">Kaydet</button>
-                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    <!-- <button class="btn btn-sm btn-success" @click="saveImages">Kaydet</button> -->
+                    <button type="button" class="btn btn-sm btn-success" data-bs-dismiss="modal">Konum seç</button>
                   </div>
                 </div>
               </div>
@@ -278,8 +286,11 @@ const newAdvert = ref({
   advert_images: [],
   user : currentUser,
   type : null,
-  rentOrBuy : null
+  rentOrBuy : null,
+  showcase : false
 })
+
+
 
 const saveAdvert = async ()=>{
   
@@ -288,7 +299,12 @@ const saveAdvert = async ()=>{
   newAdvert.value.adress.district = currentDistrict.value.name
   newAdvert.value.adress.hood = currentNeighborhoods.value.name
 
+  if(!newAdvert.value.location.lat || !newAdvert.value.location.lng){
+    newAdvert.value.location.lat = latitude.value
+    newAdvert.value.location.lng = longitude.value
+  }
 
+  console.log(newAdvert.value)
 
   let response = await addAdvert(newAdvert.value)
 

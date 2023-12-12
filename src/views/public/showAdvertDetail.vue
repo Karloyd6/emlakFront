@@ -1,6 +1,6 @@
-tb<template>
-    <headerItem class="mb-3"></headerItem>
-    <div class="mt-4" style="width: 100%;">
+<template>
+    <headerItem></headerItem>
+    <div class="pt-0 " style="width: 100%;">
         <div class="row no-gutters">
 
             <div class="col-lg-7 p-0 mt-0 " style="background-color: #212529;">
@@ -28,7 +28,7 @@ tb<template>
 
             </div>
 
-            <div class="col-lg-5 pt-3 mt-3" style="background-color: #212529; padding: 16px 24px;">
+            <div class="col-lg-5 pt-0 mt-0" style="background-color: #212529; padding: 16px 24px;">
                 <div class="row d-flex justify-content-center mt-3" >
                     <a class="txt-gray text-center">Portfoy no : {{ currentAdvert.advertId }}</a>
                     <a class="txt-gray text-center">

@@ -1,17 +1,18 @@
-import { getAdverts, getAdvertsByType } from "@/services/loaders";
+import { getAdverts, getAdvertsByType, getShowcaseList } from "@/services/loaders";
 
 export const advert = {
     namespaced: true,
     state : {
+        showcase : [],
         currentAdvert : null,
         advertList : [],
-        rentOrBuy : null
-    },
+        rentOrBuy : null,
+        advertType : null    },
     actions : {
         setAdvertList({ commit },type){
             if(type){
                 getAdvertsByType(type).then((response) => {
-                    commit("setAdvertList",response.data)
+                    commit("setAdvertList",response.data);
                 })
             }else if(!type){
                 getAdverts().then((response) => {
@@ -23,6 +24,17 @@ export const advert = {
         },
         setCurrentAdvert({ commit }, advert){
             commit("setCurrentAdvert",advert)
+        },
+        setAdvertListByQuery({ commit },advertList){
+            commit("setAdvertList",advertList)
+        },
+        setRentOrBuy({ commit },rentOrBuy){
+            commit("setRentOrBuy",rentOrBuy)
+        },
+        setShowcaseList({ commit }){
+            getShowcaseList().then((response)=>{
+                commit("setShowcaseList",response.data)
+            })
         }
     },
     mutations: {
@@ -34,6 +46,9 @@ export const advert = {
         },
         setCurrentAdvert(state, advert){
             state.currentAdvert = advert
+        },
+        setShowcaseList(state,showcaseList){
+            state.showcase = showcaseList
         }
     },
     getters : {
@@ -45,6 +60,9 @@ export const advert = {
         },
         getCurrentAdvert(state){
             return state.currentAdvert
+        },
+        getShowcaseList(state){
+            return state.showcase
         }
     }
 }

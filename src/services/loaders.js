@@ -9,8 +9,11 @@ export const getAdverts = ()=>{
 }
 
 export const getAdvertsByType = (type)=>{
-    console.log("type",type)
     return appAxios.get(`/advert/type/${type}`,{
         params : {type : type}
     })
+}
+
+export const getShowcaseList = ()=>{
+    return appAxios.get(`/advert/showcase/${true}`)
 }

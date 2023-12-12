@@ -5,16 +5,16 @@
     <main class="">
       <sidebar></sidebar>
       <mainCarousel></mainCarousel>
-      <forSaleList></forSaleList>
-      <hr>
-      <forRentList></forRentList>
-      <hr>
+      <div class="container">
+        <showCase></showCase>
+      </div>
+      
+      
       <footerItem></footerItem>
     </main>
   </template>
   <script setup>
   import mainCarousel from "@/components/mainCarousel.vue";
-  import forSaleList from "@/components/forSaleList.vue"
-  import forRentList from "@/components/forRentList.vue"
+  import showCase from "@/components/showCase.vue"
 
   </script>

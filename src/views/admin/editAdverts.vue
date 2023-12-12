@@ -32,6 +32,14 @@
               <option value="rent">Kiralık</option>
             </select>
         </div>
+        <div class="mb-3">
+          <label for="showcase" class="form-label">Vitrin ilanı</label>
+          <select id="showcase"  v-model="newAdvert.showcase" class="form-select form-select-sm" aria-label="Şehir seçiniz">
+              <option selected>Vitrine ekle</option>
+              <option value="true">evet</option>
+              <option value="false">hayır</option>
+            </select>
+        </div>
         
       </div>
       <div class="col-lg-6 col-md-12 col-sm-12">
@@ -78,6 +86,50 @@
             <label for="detail" class="form-label">Adres detayı</label>
             <input type="text" class="form-control bg-secondary border-dark" v-model="newAdvert.adress.detail" id="detail" placeholder="Adres detayı">
           </div>
+
+          <!--! GOOGLE MAP MODAL AREA -->
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Haritaya ekle
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-dark">
+                  <div class="modal-header">
+
+                    <h3 class="login-card modal-title fs-5" id="exampleModalLabel" style="padding: 10px !important;">Haritada yer seç</h3>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <!--? MAP -->
+
+                    <GoogleMap
+                      ref="mapRef"
+                      @click="getCoords"
+                      
+                      api-key="AIzaSyA5TfFcX1fsv6ERtP7oiULbK9K2belnZvE"
+                      style="width: 100%; height: 500px"
+                      :center="center"
+                      :zoom="15"
+                    >
+                      <Marker :options="markerOptions" />
+                    </GoogleMap>
+                    <!--? MAP -->
+                  </div>
+                  <div class="modal-footer">
+                    <!-- <button class="btn btn-sm btn-success" @click="saveImages">Kaydet</button> -->
+                    <button type="button" class="btn btn-sm btn-success" data-bs-dismiss="modal">Konum seç</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--! MODAL AREA-->
+
         </div>
 
 
@@ -159,11 +211,32 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref, reactive, computed } from "vue"
 import store from "@/store"
 import router from "@/router"
 import cities from "@/assets/cities/data.json"
 import appAxios from "@/utils/appAxios";
+import { GoogleMap, Marker } from "vue3-google-map";
+
+const latitude= ref(39.589247)
+    const longitude =ref(32.124502)
+    const center = reactive({ lat: latitude.value, lng: longitude.value });
+    const mapRef = ref(null)
+    // const markerOptions = reactive({ position: {lat : latitude.value, lng: longitude.value} })
+    const markerOptions = computed(()=>{
+      return { position : { lat : latitude.value, lng : longitude.value }}
+    })
+
+    const getCoords = (e)=>{
+      const gmap = mapRef.value.map;
+      const center2 = gmap.getCenter();
+        console.log(center2.lat(),center2.lng())
+        latitude.value = center2.lat()
+        longitude.value = center2.lng()
+        newAdvert.value.location.lat=center2.lat()
+        newAdvert.value.location.lng=center2.lng()
+    }
+
 
 const currentAdvert = store.getters._getCurrentAdvert
 
@@ -210,12 +283,16 @@ const newAdvert = ref({
         exchange: currentAdvert.info.exchange,
         credit: currentAdvert.info.credit
     },
+    location: {
+        lat : currentAdvert.location.lat,
+        lng : currentAdvert.location.lng
+    },
   advert_images : currentAdvert.advert_images,
   type : currentAdvert.type,
   user : currentAdvert.user,
-  rentOrBuy : currentAdvert.rentOrBuy
+  rentOrBuy : currentAdvert.rentOrBuy,
+  showcase : currentAdvert.showcase
 })
-console.log("new",newAdvert.value)
 const cancelForm = ()=>{
     store.commit.currentAdvert = null;
     router.push({name : "AdvertList"})

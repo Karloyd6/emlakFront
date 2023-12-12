@@ -13,13 +13,18 @@ body{
     margin: 0px;
     overflow-x: hidden;
 }
+.header-bg{
+    background-color: #0d326d;
+    width: 100%;
+    height: 90px;
+}
 
 .header-place {
     background-color: var(--cd2);
     color: var(--cGrey);
     height: fit-content;
     position:fixed;top: 0px ;right: 0px;left: 0px;
-    position: relative;
+    position: relative !important;
 }
 
 
@@ -200,7 +205,7 @@ body{
 .main-bg{
     background-image: url("assets/backgrounds/main-bg.jpg");
     width: 100%;
-    height: 800px;
+    height: 600px;
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -231,6 +236,13 @@ body{
     backdrop-filter: blur(10px);
 }
 
+.advert-container{
+    display: flex !important;
+        justify-content: start !important;
+        width: 100% !important;
+        float: left !important;
+        padding-left: 15px;
+}
 
 @media screen and (max-width: 720px) {
     .image-container{

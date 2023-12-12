@@ -37,6 +37,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, _, next) => {
+    
     const authRequiredRoutes = ["AddImages","AdvertList","AdvertDetails","EditAdvert","EditProfile"];
     const authNotRequiredRoutes = ["LoginPage"];
     const _isAuthenticated = JSON.parse(localStorage.getItem("user"))
