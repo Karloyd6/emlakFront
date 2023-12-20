@@ -119,7 +119,6 @@ const searchIt = async ()=>{
   setTimeout(() => {
   // const advertList =  store.getters["advert/getAdvertList"]
   const advertList =  store.state.advert.advertList
-  console.log("adlist",advertList)
   const adress = {
     city : currentCity.value.name,
     county : currentCounty.value.name,
@@ -189,6 +188,7 @@ const getActiveClass = store.getters['advert/getAdvertType']
 // console.log(store.getters['getAdvertType'])
 
 fillCities()
+
 const goToSalePage = (whatFor)=>{
   console.log(whatFor)
   if(whatFor=="allHome"){

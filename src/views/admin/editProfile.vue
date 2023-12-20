@@ -16,7 +16,7 @@
         <input
           type="text"
           v-model="userInfo.username"
-          class="form-control"
+          class="form-control form-control-sm"
           placeholder="Kullanıcı adı"
           aria-label="Username"
           aria-describedby="username"
@@ -29,7 +29,7 @@
         <input
           type="text"
           v-model="userInfo.name"
-          class="form-control"
+          class="form-control form-control-sm"
           placeholder="ad soyad"
           aria-label="name"
           aria-describedby="name"

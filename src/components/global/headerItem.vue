@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-primary fixed-top">
+  <nav class="navbar navbar-expand-lg bg-primary fixed-top rounded">
   <div class="container-fluid ">
 
    <div class="d-flex align-items-center">
@@ -46,7 +46,7 @@
     </div>
   </div>
 </nav>
-<div class="header-bg">
+<div class="header-bg rounded">
 
 </div>
 </template>

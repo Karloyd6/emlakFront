@@ -1,11 +1,14 @@
 <template>
     <div class="row dark-bg text-light py-5">
-        <div class="col-lg-7 d-flex justify-content-center align-items-center">
+        <div class="col-lg-5 d-flex justify-content-center">
             
-            <div class="px-5">
+            <div class="px-4">
                 <div class="row">
                 <div class="col">
-                    <h3><i class="fa-solid fa-mountain-city"></i> KILINÇ_emlak</h3>
+                  <a class="navbar-brand me-3 text-light fw-bolder" href="#" style="margin: 0px; padding: 0px;">
+                    <img src="@/assets/images/ke-logo.png" alt="" style="width: auto; height: 75px; margin: 0px; padding: 0px;">
+                    KILINÇ Emlak
+                  </a>
                 </div>
             </div>
             <div class="row">
@@ -19,8 +22,12 @@
 
         </div>
 
-        <div class="col-lg-2">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="col-lg-3 d-flex justify-content-center">
+          
+            <ul class=" me-auto mb-2 mb-lg-0 bottom-nav">
+              <li class="nav-item">
+                <h4 style="color: #999999;">Linkler :</h4>
+              </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Anasayfa</a>
                 </li>
@@ -36,37 +43,25 @@
               </ul>
         </div>
 
-        <div class="col-lg-3">
-            <p>Adres satırı 1 adresadresadres Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum enim eos ea, quas laboriosam cum?</p>
-            
-
-            <!--! SOCİAL MEDİA LİNK PLACE -->
-
-        <div
-          class="col d-flex justify-content-center"
-        >
-          <div class="social-place d-flex justify-content-around">
-            <a
-              href="#"
-              class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-              ><i class="fa-brands fa-instagram fa-xl"> </i
-            ></a>
-            <a
-              href="#"
-              class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-              ><i class="fa-brands fa-twitter fa-xl"> </i
-            ></a>
-            <a
-              href="#"
-              class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-              ><i class="fa-brands fa-facebook fa-xl"> </i
-            ></a>
+        <div class="col-lg-4 d-flex justify-content-center">
+          <div class="col">
+            <h4>İletişim :</h4>
+            <p><i class="fa-solid fa-location-dot fa-lg me-2"></i> Adres bölümü</p>
+            <p><i class="fa-solid fa-envelope fa-lg me-2"></i> info@example.com</p>
+            <p><i class="fa-solid fa-phone fa-lg me-2"></i> 0541 555 66 77</p>
+            <p><i class="fa-brands fa-whatsapp fa-lg me-2"></i> 0555 666 77 88</p>
           </div>
         </div>
-        <!--! SOCİAL MEDİA LİNK PLACE END-->
-        </div>
     </div>
-    <div class="row soft-dark-bg">
-       <small class="text-center"> © Designed & programmed by YGTDNMZ</small>
+    <div class="row dark-bg p-0">
+      <div class="delinator-line"><div class="delinator"></div></div>
+       <h6 class="text-center text-light mt-2"> © 2024 Designed & programmed by YGTDNMZ</h6>
+       
+       <div class="col-12 d-flex justify-content-center p-3 wrapper p-0 m-0">
+        <div class="icon github">
+          <span class="tooltip">github</span>
+          <i class="fa-brands fa-github fa-2xl"></i>
+        </div>
+      </div>
     </div>
 </template>
